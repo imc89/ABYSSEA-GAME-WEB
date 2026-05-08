@@ -1,0 +1,165 @@
+/* =============================================================================
+   ABYSSEA — style_versions.css
+   -----------------------------------------------------------------------------
+   ES: Estilos específicos para las páginas de historial de versiones.
+   EN: Specific styles for the version history pages.
+   ============================================================================= */
+
+/* ES: Contenedor principal de la página / EN: Main page container */
+.version-page {
+    padding: 120px 2rem 60px;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0b3050 0%, var(--deep) 100%);
+    background-attachment: fixed;
+}
+
+/* ES: Encabezado con título y descripción / EN: Header with title and description */
+.version-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+/* ES: Lista que agrupa todos los ítems de versión / EN: List grouping all version items */
+.version-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ES: Ítem individual de versión (Tarjeta) / EN: Individual version item (Card) */
+.version-item {
+    background: rgba(10, 34, 53, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 2rem;
+    transition: transform 0.3s, border-color 0.3s;
+    backdrop-filter: blur(10px);
+    /* ES: Efecto cristal / EN: Glassmorphism effect */
+}
+
+/* ES: Resaltado para la versión más reciente / EN: Highlight for the most recent version */
+.version-item:first-child {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--glow);
+    background: rgba(10, 34, 53, 0.6);
+}
+
+.v-num {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.v-date {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.v-size {
+    font-weight: 600;
+    color: var(--text);
+    opacity: 0.8;
+}
+
+/* ES: Botones de descarga / EN: Download buttons */
+.v-dl-btn {
+    padding: 0.6rem 1.4rem;
+    background: var(--accent);
+    color: var(--deep);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.v-dl-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--glow);
+}
+
+/* ES: Enlace de retorno al inicio / EN: Back to home link */
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--accent);
+}
+
+/* =========================================================================
+   ETIQUETAS (BADGES)
+   ========================================================================= */
+.badge-latest,
+.badge-beta,
+.badge-old {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.badge-latest {
+    background: var(--teal);
+    color: var(--deep);
+}
+
+.badge-beta {
+    background: #facc15;
+    /* ES: Amarillo / EN: Yellow */
+    color: #000;
+}
+
+.badge-old {
+    background: rgba(100, 116, 139, 0.2);
+    color: var(--muted);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* =========================================================================
+   COLORES BETA (BETA COLORS)
+   ========================================================================= */
+.version-item.beta {
+    border-color: rgba(250, 204, 21, 0.3);
+}
+
+.version-item.beta .v-num {
+    color: #facc15;
+}
+
+.v-dl-btn.beta {
+    background: #facc15;
+    color: #000;
+}
+
+.v-dl-btn.beta:hover {
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+@media (max-width: 768px) {
+    .version-item {
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+    }
+
+    .v-date {
+        grid-column: 1 / 3;
+    }
+}
