@@ -8,8 +8,103 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================================================
-       1. GESTIÓN DE VERSIONES (DYNAMIC VERSIONS)
+       0. UTILIDADES GLOBALES (GLOBAL UTILITIES)
        ========================================================================= */
+    
+    /**
+     * ES: Detecta si el usuario está en un dispositivo móvil.
+     * EN: Detects if the user is on a mobile device.
+     */
+    const isMobileDevice = () => {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 1024;
+    };
+
+    /**
+     * ES: Muestra modal de incompatibilidad.
+     * EN: Shows incompatibility modal.
+     */
+    const showCompatibilityModal = () => {
+        const texts = ABYSSEA_LOCALES[currentLang];
+        let modal = document.getElementById('compatibility-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'compatibility-modal';
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content" style="text-align: center; border-color: #ef4444;">
+                    <button class="modal-close">&times;</button>
+                    <h2 class="font-glech modal-title" style="color: #ef4444;" data-i18n="modal_comp_title"></h2>
+                    <p style="margin-bottom: 2rem; line-height: 1.6;" data-i18n="modal_comp_desc"></p>
+                    <button class="v-dl-btn modal-close-btn" style="width: 100%;" data-i18n="modal_comp_btn"></button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            const close = () => modal.classList.remove('open');
+            modal.querySelector('.modal-close').addEventListener('click', close);
+            modal.querySelector('.modal-close-btn').addEventListener('click', close);
+            modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+        }
+        updateUILanguage(); 
+        modal.classList.add('open');
+    };
+
+    /* =========================================================================
+       1. GESTIÓN DE IDIOMAS (I18N SYSTEM)
+       ========================================================================= */
+    // ES: Estado del idioma actual (Prioridad: LocalStorage > Browser > Default ES)
+    // EN: Current language state (Priority: LocalStorage > Browser > Default ES)
+    let currentLang = localStorage.getItem('abyssea_lang');
+    if (!currentLang) {
+        const browserLang = navigator.language || navigator.userLanguage;
+        currentLang = browserLang.startsWith('es') ? 'es' : 'en';
+    }
+
+    /**
+     * ES: Actualiza todos los elementos con el atributo data-i18n.
+     * EN: Updates all elements with the data-i18n attribute.
+     */
+    function updateUILanguage() {
+        if (typeof ABYSSEA_LOCALES === 'undefined') return;
+        const texts = ABYSSEA_LOCALES[currentLang];
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (texts[key]) {
+                el.innerHTML = texts[key];
+            }
+        });
+
+        // ES: Actualizar estado visual de los botones / EN: Update buttons visual state
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            const btnLang = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+            btn.classList.toggle('active', btnLang === currentLang);
+        });
+
+        // ES: Actualizar idioma de la página (SEO) / EN: Update page lang (SEO)
+        document.documentElement.lang = currentLang;
+        
+        // ES: Guardar preferencia / EN: Save preference
+        localStorage.setItem('abyssea_lang', currentLang);
+
+        // ES: Refrescar botones de descarga en Home / EN: Refresh home download buttons
+        if (typeof initializeVersionManagement === 'function') {
+            initializeVersionManagement();
+        }
+    }
+
+    // ES: Definición de funciones de idioma / EN: Language functions definition
+    window.setLanguage = (lang) => {
+        if (currentLang === lang) return;
+        currentLang = lang;
+        updateUILanguage();
+        
+        document.body.style.opacity = '0.5';
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 150);
+    };
+
     function initializeVersionManagement() {
         if (typeof ABYSSEA_VERSIONS !== 'undefined') {
             const versions = ABYSSEA_VERSIONS;
@@ -20,25 +115,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const macHomeBtn = document.getElementById('download-macos');
 
             // --- 1.1 Actualizar botones en Home (Update Home Buttons) ---
-            const updateHomeButton = (btn, platformKey) => {
+            const updateHomeButton = (btn, platformId) => {
                 if (!btn) return;
                 
-                // ES: Prioridad: Latest > Beta / EN: Priority: Latest > Beta
+                const texts = ABYSSEA_LOCALES[currentLang];
                 const isLatest = !!versions.latest;
                 const releaseData = isLatest ? versions.latest : versions.beta;
+                const dataKey = platformId === 'win' ? 'windows' : 'macos';
                 
-                if (releaseData && releaseData[platformKey]) {
+                if (releaseData && releaseData[dataKey]) {
+                    const platformData = releaseData[dataKey];
                     const versionTag = btn.querySelector('.v-tag');
                     const sizeTag = btn.querySelector('.s-tag');
+                    const titleTag = btn.querySelector('.download-title');
                     const detailsContainer = btn.querySelector('.download-details');
 
                     if (versionTag) versionTag.textContent = releaseData.version;
-                    if (sizeTag) sizeTag.textContent = releaseData[platformKey].size;
-
-                    // ES: Si es beta y no hay latest, añadir tag amarillo
-                    // EN: If it's beta and there's no latest, add yellow tag
+                    if (sizeTag) sizeTag.textContent = platformData.size;
+                    if (titleTag) titleTag.textContent = texts[`dl_title_${platformId}`];
+                    
                     if (!isLatest && releaseData === versions.beta && detailsContainer) {
-                        // ES: Evitar duplicados / EN: Avoid duplicates
                         if (!btn.querySelector('.badge-beta-home')) {
                             const badge = document.createElement('span');
                             badge.className = 'badge-beta badge-beta-home';
@@ -51,14 +147,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            updateHomeButton(winHomeBtn, 'windows');
-            updateHomeButton(macHomeBtn, 'macos');
+            // ES: Actualizar botones Home / EN: Update Home buttons
+            updateHomeButton(winHomeBtn, 'win');
+            updateHomeButton(macHomeBtn, 'mac');
 
             // --- 1.2 Renderizar páginas de versiones (Render Version Pages) ---
             const renderVersionPageContent = (platformKey) => {
                 const container = document.getElementById(`${platformKey}-version-list`);
                 if (!container) return;
 
+                const texts = ABYSSEA_LOCALES[currentLang];
                 const platform = platformKey === 'win' ? 'windows' : 'macos';
                 const pathPrefix = window.location.pathname.includes('/pages/') ? '../' : '';
 
@@ -68,23 +166,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const getItemHtml = (data, typeClass, badgeText, badgeClass) => {
                     const pData = data[platform];
                     const downloadUrl = pData.url.startsWith('http') ? pData.url : pathPrefix + pData.url;
-                    // ES: Escapar comillas para el atributo data / EN: Escape quotes for data attribute
                     const changesAttr = data.changes ? data.changes.replace(/"/g, '&quot;') : '';
                     
+                    const btnText = typeClass === 'old' && pData.url === '#' ? texts.ver_btn_archive : (typeClass === 'beta' ? texts.ver_btn_beta : texts.ver_btn_dl);
+
                     return `
                         <div class="version-item ${typeClass}" data-version="${data.version}" data-changes="${changesAttr}">
                             <div class="v-main-info">
                                 <span class="v-num">${data.version}</span>
                                 <span class="${badgeClass}">${badgeText}</span>
                             </div>
-                            <span class="v-date">Publicado el ${data.date}</span>
+                            <span class="v-date">${texts.ver_pub_date} ${data.date}</span>
                             <span class="v-size">${pData.size}</span>
                             <div class="v-actions">
-                                <button class="v-updates-btn" title="Ver cambios">
+                                <button class="v-updates-btn" title="${texts.ver_btn_updates}">
                                     <i data-lucide="notebook-pen" style="width: 18px; height: 18px;"></i>
-                                    UPDATES
+                                    ${texts.ver_btn_updates}
                                 </button>
-                                <a href="${downloadUrl}" class="v-dl-btn ${typeClass}">DESCARGAR</a>
+                                <a href="${downloadUrl}" class="v-dl-btn ${typeClass}" style="${pData.url === '#' ? 'pointer-events: none; opacity: 0.5;' : ''}">
+                                    ${btnText}
+                                </a>
                             </div>
                         </div>
                     `;
@@ -93,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // ES: SECCIÓN ESTABLE
                 if (versions.latest) {
                     dynamicHtml += `
-                        <h3 class="font-glech" style="margin-top: 2rem; color: var(--accent); font-size: 1.5rem;">Versión Estable</h3>
+                        <h3 class="font-glech" style="margin-top: 2rem; color: var(--accent); font-size: 1.5rem;">${texts.ver_sec_stable}</h3>
                         ${getItemHtml(versions.latest, '', 'LATEST', 'badge-latest')}
                     `;
                 }
@@ -101,32 +202,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 // ES: SECCIÓN BETA
                 if (versions.beta) {
                     dynamicHtml += `
-                        <h3 class="font-glech section-sub" style="margin-top: 3rem; color: #facc15; font-size: 1.5rem;">Versiones Beta</h3>
+                        <h3 class="font-glech section-sub" style="margin-top: 3rem; color: #facc15; font-size: 1.5rem;">${texts.ver_sec_beta}</h3>
                         ${getItemHtml(versions.beta, 'beta', 'BETA', 'badge-beta')}
                     `;
                 }
 
                 // ES: SECCIÓN ARCHIVO
                 if (versions.archive && versions.archive.length > 0) {
-                    dynamicHtml += `<h3 class="font-glech" style="margin-top: 3rem; color: var(--muted); font-size: 1.2rem;">Archivo</h3>`;
+                    dynamicHtml += `<h3 class="font-glech" style="margin-top: 3rem; color: var(--muted); font-size: 1.2rem;">${texts.ver_sec_archive}</h3>`;
                     dynamicHtml += versions.archive.map(item => getItemHtml(item, 'old', 'OLD VERSION', 'badge-old')).join('');
                 }
 
                 container.innerHTML = dynamicHtml;
+                if (typeof lucide !== 'undefined') lucide.createIcons();
 
-                // ES: Inicializar iconos de Lucide / EN: Initialize Lucide icons
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
-
-                // ES: Añadir eventos de click para la modal de cambios
-                // EN: Add click events for the changes modal
+                // ES: Añadir eventos de click
                 container.querySelectorAll('.v-updates-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const item = btn.closest('.version-item');
                         const versionTag = item.getAttribute('data-version');
                         const changesText = item.getAttribute('data-changes');
                         showUpdatesModal(versionTag, changesText);
+                    });
+                });
+
+                container.querySelectorAll('.v-dl-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        if (isMobileDevice()) {
+                            e.preventDefault();
+                            showCompatibilityModal();
+                        }
                     });
                 });
             };
@@ -177,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     initializeVersionManagement();
+    updateUILanguage();
 
     /* =========================================================================
        2. CANVAS DE BURBUJAS (BUBBLES EFFECT)

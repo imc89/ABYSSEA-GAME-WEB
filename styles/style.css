@@ -139,66 +139,75 @@ button,
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1.4rem 0;
+    padding: 0.8rem 0;
     transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
 }
 
 #navbar.scrolled {
-    padding: 0.7rem 0;
+    padding: 0.4rem 0;
     background: rgba(2, 11, 20, 0.85);
     backdrop-filter: blur(14px);
     box-shadow: 0 1px 0 var(--border);
 }
 
 .nav-inner {
-    max-width: 1200px;
+    max-width: 1400px; /* ES: Un poco más ancho para dar aire / EN: Slightly wider for breathing room */
     margin: 0 auto;
     padding: 0 2rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    height: 55px;
 }
 
 .nav-logo {
     font-size: 1.65rem;
     color: #fff;
     text-decoration: none;
-    flex-shrink: 0;
+    justify-self: start;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }
 
 .nav-links {
     display: flex;
     gap: 2.4rem;
+    justify-self: center;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-self: end;
 }
 
 .nav-links a,
 .nav-link {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
-    transition: color 0.25s;
+    letter-spacing: 0.15em;
+    transition: all 0.3s ease;
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
 }
 
 .nav-links a:hover,
 .nav-link:hover {
     color: var(--accent);
+    letter-spacing: 0.2em;
 }
 
 .nav-cta-btn {
     text-decoration: none;
-    padding: 0.55rem 1.4rem;
+    padding: 0.5rem 1.2rem;
     border: 1px solid var(--accent);
     color: var(--accent);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    border-radius: 4px;
-    transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
 }
 
@@ -224,6 +233,27 @@ button,
     background: #fff;
     border-radius: 2px;
     transition: transform 0.3s;
+}
+
+@media (max-width: 1024px) {
+    .nav-inner {
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-actions .lang-switcher,
+    .nav-actions .nav-cta-btn {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
 }
 
 .mobile-menu {
@@ -1155,6 +1185,10 @@ footer {
         gap: 3rem;
     }
 
+    .story-text {
+        text-align: center;
+    }
+
     .features-grid {
         grid-template-columns: 1fr 1fr;
     }
@@ -1240,4 +1274,108 @@ footer {
     background: rgba(100, 116, 139, 0.2);
     color: var(--muted);
     border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* =========================================================================
+   SELECTOR DE IDIOMA (LANGUAGE SWITCHER)
+   ========================================================================= */
+/* =========================================================================
+   SELECTOR DE IDIOMA (LANGUAGE SWITCHER)
+   ========================================================================= */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    letter-spacing: 1px;
+}
+
+.lang-btn:hover, .lang-btn.active {
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--glow);
+}
+
+.lang-switcher .sep {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 0.7rem;
+    pointer-events: none;
+}
+
+/* =========================================================================
+   MEJORAS SELECTOR IDIOMA (I18N UI IMPROVEMENTS)
+   ========================================================================= */
+
+/* ES: Ocultar selector de navbar en móvil / EN: Hide navbar switcher on mobile */
+@media (max-width: 1024px) {
+    #navbar .lang-switcher {
+        display: none;
+    }
+}
+
+.mobile-lang-switcher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.mobile-lang-switcher .lang-btn {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+}
+
+.mobile-lang-switcher .lang-divider {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 0.7rem;
+}
+
+.mobile-lang-switcher .lang-btn.active {
+    opacity: 1;
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--glow);
+}
+@media (max-width: 650px) {
+    .parallax-divider {
+        height: 180px; /* Más aire para que no esté encajonado / More breathing room */
+    }
+
+    .parallax-text-overlay {
+        padding: 0 2rem;
+    }
+
+    .tagline-sub {
+        letter-spacing: 0.3em !important;
+        white-space: nowrap;
+        font-size: 0.75rem;
+    }
+
+    .parallax-quote {
+        letter-spacing: 0.15em !important;
+        font-size: 0.7rem;
+    }
+
+    .hero-badges {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+    }
+
+    .badge {
+        white-space: nowrap;
+        font-size: 0.65rem;
+    }
 }
