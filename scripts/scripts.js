@@ -55,85 +55,120 @@ document.addEventListener('DOMContentLoaded', () => {
             updateHomeButton(macHomeBtn, 'macos');
 
             // --- 1.2 Renderizar páginas de versiones (Render Version Pages) ---
-            /**
-             * ES: Dibuja dinámicamente todo el contenido de las páginas win_version / mac_version.
-             * EN: Dynamically draws all content for the win_version / mac_version pages.
-             * @param {string} platformKey - 'win' o 'mac'
-             */
             const renderVersionPageContent = (platformKey) => {
                 const container = document.getElementById(`${platformKey}-version-list`);
                 if (!container) return;
 
                 const platform = platformKey === 'win' ? 'windows' : 'macos';
-                // ES: Detectar si estamos en la subcarpeta / EN: Detect if we are in the subfolder
                 const pathPrefix = window.location.pathname.includes('/pages/') ? '../' : '';
 
                 let dynamicHtml = '';
 
-                // ES: SECCIÓN ESTABLE (Stable Section)
-                if (versions.latest) {
-                    const latest = versions.latest;
-                    const pData = latest[platform];
+                // ES: Helper para renderizar un item / EN: Helper to render an item
+                const getItemHtml = (data, typeClass, badgeText, badgeClass) => {
+                    const pData = data[platform];
                     const downloadUrl = pData.url.startsWith('http') ? pData.url : pathPrefix + pData.url;
+                    // ES: Escapar comillas para el atributo data / EN: Escape quotes for data attribute
+                    const changesAttr = data.changes ? data.changes.replace(/"/g, '&quot;') : '';
                     
+                    return `
+                        <div class="version-item ${typeClass}" data-version="${data.version}" data-changes="${changesAttr}">
+                            <div class="v-main-info">
+                                <span class="v-num">${data.version}</span>
+                                <span class="${badgeClass}">${badgeText}</span>
+                            </div>
+                            <span class="v-date">Publicado el ${data.date}</span>
+                            <span class="v-size">${pData.size}</span>
+                            <div class="v-actions">
+                                <button class="v-updates-btn" title="Ver cambios">
+                                    <i data-lucide="notebook-pen" style="width: 18px; height: 18px;"></i>
+                                    UPDATES
+                                </button>
+                                <a href="${downloadUrl}" class="v-dl-btn ${typeClass}">DESCARGAR</a>
+                            </div>
+                        </div>
+                    `;
+                };
+
+                // ES: SECCIÓN ESTABLE
+                if (versions.latest) {
                     dynamicHtml += `
                         <h3 class="font-glech" style="margin-top: 2rem; color: var(--accent); font-size: 1.5rem;">Versión Estable</h3>
-                        <div class="version-item">
-                            <div>
-                                <span class="v-num">${latest.version}</span>
-                                <span class="badge-latest">LATEST</span>
-                            </div>
-                            <span class="v-date">Publicado el ${latest.date}</span>
-                            <span class="v-size">${pData.size}</span>
-                            <a href="${downloadUrl}" class="v-dl-btn">DESCARGAR</a>
-                        </div>
+                        ${getItemHtml(versions.latest, '', 'LATEST', 'badge-latest')}
                     `;
                 }
 
-                // ES: SECCIÓN BETA (Beta Section)
+                // ES: SECCIÓN BETA
                 if (versions.beta) {
-                    const beta = versions.beta;
-                    const pData = beta[platform];
-                    const downloadUrl = pData.url.startsWith('http') ? pData.url : pathPrefix + pData.url;
-                    
                     dynamicHtml += `
                         <h3 class="font-glech section-sub" style="margin-top: 3rem; color: #facc15; font-size: 1.5rem;">Versiones Beta</h3>
-                        <div class="version-item beta">
-                            <div>
-                                <span class="v-num">${beta.version}</span>
-                                <span class="badge-beta">BETA</span>
-                            </div>
-                            <span class="v-date">Publicado el ${beta.date}</span>
-                            <span class="v-size">${pData.size}</span>
-                            <a href="${downloadUrl}" class="v-dl-btn beta">PROBAR BETA</a>
-                        </div>
+                        ${getItemHtml(versions.beta, 'beta', 'BETA', 'badge-beta')}
                     `;
                 }
 
-                // ES: SECCIÓN ARCHIVO (Archive Section)
+                // ES: SECCIÓN ARCHIVO
                 if (versions.archive && versions.archive.length > 0) {
                     dynamicHtml += `<h3 class="font-glech" style="margin-top: 3rem; color: var(--muted); font-size: 1.2rem;">Archivo</h3>`;
-                    dynamicHtml += versions.archive.map(item => {
-                        const pData = item[platform];
-                        const downloadUrl = (pData.url === '#' || pData.url.startsWith('http')) ? pData.url : pathPrefix + pData.url;
-                        return `
-                            <div class="version-item" style="opacity: 0.7; margin-bottom: 1rem;">
-                                <div>
-                                    <span class="v-num">${item.version}</span>
-                                    <span class="badge-old">OLD VERSION</span>
-                                </div>
-                                <span class="v-date">Publicado el ${item.date}</span>
-                                <span class="v-size">${pData.size}</span>
-                                <a href="${downloadUrl}" class="v-dl-btn" style="opacity: 0.5; ${pData.url === '#' ? 'pointer-events: none;' : ''}">
-                                    ${pData.url === '#' ? 'ARCHIVO' : 'DESCARGAR'}
-                                </a>
-                            </div>
-                        `;
-                    }).join('');
+                    dynamicHtml += versions.archive.map(item => getItemHtml(item, 'old', 'OLD VERSION', 'badge-old')).join('');
                 }
 
                 container.innerHTML = dynamicHtml;
+
+                // ES: Inicializar iconos de Lucide / EN: Initialize Lucide icons
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+
+                // ES: Añadir eventos de click para la modal de cambios
+                // EN: Add click events for the changes modal
+                container.querySelectorAll('.v-updates-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const item = btn.closest('.version-item');
+                        const versionTag = item.getAttribute('data-version');
+                        const changesText = item.getAttribute('data-changes');
+                        showUpdatesModal(versionTag, changesText);
+                    });
+                });
             };
+
+            /**
+             * ES: Muestra la modal con los cambios de la versión.
+             * EN: Shows the modal with the version changes.
+             */
+            function showUpdatesModal(version, changesString) {
+                let modal = document.getElementById('updates-modal');
+                
+                // ES: Crear modal si no existe / EN: Create modal if it doesn't exist
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'updates-modal';
+                    modal.className = 'modal-overlay';
+                    modal.innerHTML = `
+                        <div class="modal-content">
+                            <button class="modal-close">&times;</button>
+                            <h2 class="font-glech modal-title">UPDATES <span class="accent" id="modal-v-num"></span></h2>
+                            <ul class="modal-changes-list" id="modal-changes-list"></ul>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                    
+                    modal.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('open'));
+                    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+                }
+
+                const list = modal.querySelector('#modal-changes-list');
+                const vNum = modal.querySelector('#modal-v-num');
+                
+                vNum.textContent = version.toUpperCase();
+                
+                // ES: Procesar cambios (separados por guiones)
+                // EN: Process changes (separated by dashes)
+                const changesArray = changesString.split('-').map(s => s.trim()).filter(s => s.length > 0);
+                list.innerHTML = changesArray.map(change => `<li>${change}</li>`).join('');
+                
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden'; // ES: Bloquear scroll / EN: Lock scroll
+            }
 
             renderVersionPageContent('win');
             renderVersionPageContent('mac');

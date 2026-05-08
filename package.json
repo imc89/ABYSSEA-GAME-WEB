@@ -10,5 +10,8 @@
     "gh-pages": "^6.2.0",
     "serve": "^14.2.3"
   },
-  "homepage": "https://imc89.github.io/ABYSSEA-GAME-OFFICIAL-WEB"
+  "homepage": "https://imc89.github.io/ABYSSEA-GAME-OFFICIAL-WEB",
+  "dependencies": {
+    "lucide": "^1.3.0"
+  }
 }
