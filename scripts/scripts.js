@@ -11,12 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
        1. GESTIÓN DE VERSIONES (DYNAMIC VERSIONS)
        ========================================================================= */
     function initializeVersionManagement() {
-        /**
-         * ES: Verifica si el objeto global ABYSSEA_VERSIONS (de versions-data.js) existe.
-         * EN: Checks if the global ABYSSEA_VERSIONS object (from versions-data.js) exists.
-         */
         if (typeof ABYSSEA_VERSIONS !== 'undefined') {
-            const versionsData = ABYSSEA_VERSIONS;
+            const versions = ABYSSEA_VERSIONS;
             
             // ES: Referencias a botones de descarga en la Home
             // EN: References to download buttons on the Home page
@@ -24,76 +20,81 @@ document.addEventListener('DOMContentLoaded', () => {
             const macHomeBtn = document.getElementById('download-macos');
 
             // --- 1.1 Actualizar botones en Home (Update Home Buttons) ---
-            if (winHomeBtn && versionsData.windows && versionsData.windows.latest) {
+            if (winHomeBtn && versions.latest && versions.latest.windows) {
                 const versionTag = winHomeBtn.querySelector('.v-tag');
                 const sizeTag = winHomeBtn.querySelector('.s-tag');
-                if (versionTag) versionTag.textContent = versionsData.windows.latest.version;
-                if (sizeTag) sizeTag.textContent = versionsData.windows.latest.size;
+                if (versionTag) versionTag.textContent = versions.latest.version;
+                if (sizeTag) sizeTag.textContent = versions.latest.windows.size;
             }
-            if (macHomeBtn && versionsData.macos && versionsData.macos.latest) {
+            if (macHomeBtn && versions.latest && versions.latest.macos) {
                 const versionTag = macHomeBtn.querySelector('.v-tag');
                 const sizeTag = macHomeBtn.querySelector('.s-tag');
-                if (versionTag) versionTag.textContent = versionsData.macos.latest.version;
-                if (sizeTag) sizeTag.textContent = versionsData.macos.latest.size;
+                if (versionTag) versionTag.textContent = versions.latest.version;
+                if (sizeTag) sizeTag.textContent = versions.latest.macos.size;
             }
 
             // --- 1.2 Renderizar páginas de versiones (Render Version Pages) ---
             /**
              * ES: Dibuja dinámicamente todo el contenido de las páginas win_version / mac_version.
              * EN: Dynamically draws all content for the win_version / mac_version pages.
-             * @param {string} platform - 'win' o 'mac'
+             * @param {string} platformKey - 'win' o 'mac'
              */
-            const renderVersionPageContent = (platform) => {
-                const container = document.getElementById(`${platform}-version-list`);
+            const renderVersionPageContent = (platformKey) => {
+                const container = document.getElementById(`${platformKey}-version-list`);
                 if (!container) return;
 
-                const platformData = versionsData[platform === 'win' ? 'windows' : 'macos'];
-                if (!platformData) return;
-
+                const platform = platformKey === 'win' ? 'windows' : 'macos';
                 // ES: Detectar si estamos en la subcarpeta / EN: Detect if we are in the subfolder
                 const pathPrefix = window.location.pathname.includes('/pages/') ? '../' : '';
 
                 let dynamicHtml = '';
 
                 // ES: SECCIÓN ESTABLE (Stable Section)
-                if (platformData.latest) {
-                    const downloadUrl = platformData.latest.url.startsWith('http') ? platformData.latest.url : pathPrefix + platformData.latest.url;
+                if (versions.latest) {
+                    const latest = versions.latest;
+                    const pData = latest[platform];
+                    const downloadUrl = pData.url.startsWith('http') ? pData.url : pathPrefix + pData.url;
+                    
                     dynamicHtml += `
                         <h3 class="font-glech" style="margin-top: 2rem; color: var(--accent); font-size: 1.5rem;">Versión Estable</h3>
                         <div class="version-item">
                             <div>
-                                <span class="v-num">${platformData.latest.version}</span>
+                                <span class="v-num">${latest.version}</span>
                                 <span class="badge-latest">LATEST</span>
                             </div>
-                            <span class="v-date">Publicado el ${platformData.latest.date}</span>
-                            <span class="v-size">${platformData.latest.size}</span>
+                            <span class="v-date">Publicado el ${latest.date}</span>
+                            <span class="v-size">${pData.size}</span>
                             <a href="${downloadUrl}" class="v-dl-btn">DESCARGAR</a>
                         </div>
                     `;
                 }
 
                 // ES: SECCIÓN BETA (Beta Section)
-                if (platformData.beta) {
-                    const downloadUrl = platformData.beta.url.startsWith('http') ? platformData.beta.url : pathPrefix + platformData.beta.url;
+                if (versions.beta) {
+                    const beta = versions.beta;
+                    const pData = beta[platform];
+                    const downloadUrl = pData.url.startsWith('http') ? pData.url : pathPrefix + pData.url;
+                    
                     dynamicHtml += `
                         <h3 class="font-glech section-sub" style="margin-top: 3rem; color: #facc15; font-size: 1.5rem;">Versiones Beta</h3>
                         <div class="version-item beta">
                             <div>
-                                <span class="v-num">${platformData.beta.version}</span>
+                                <span class="v-num">${beta.version}</span>
                                 <span class="badge-beta">BETA</span>
                             </div>
-                            <span class="v-date">Publicado el ${platformData.beta.date}</span>
-                            <span class="v-size">${platformData.beta.size}</span>
+                            <span class="v-date">Publicado el ${beta.date}</span>
+                            <span class="v-size">${pData.size}</span>
                             <a href="${downloadUrl}" class="v-dl-btn beta">PROBAR BETA</a>
                         </div>
                     `;
                 }
 
                 // ES: SECCIÓN ARCHIVO (Archive Section)
-                if (platformData.archive && platformData.archive.length > 0) {
+                if (versions.archive && versions.archive.length > 0) {
                     dynamicHtml += `<h3 class="font-glech" style="margin-top: 3rem; color: var(--muted); font-size: 1.2rem;">Archivo</h3>`;
-                    dynamicHtml += platformData.archive.map(item => {
-                        const downloadUrl = (item.url === '#' || item.url.startsWith('http')) ? item.url : pathPrefix + item.url;
+                    dynamicHtml += versions.archive.map(item => {
+                        const pData = item[platform];
+                        const downloadUrl = (pData.url === '#' || pData.url.startsWith('http')) ? pData.url : pathPrefix + pData.url;
                         return `
                             <div class="version-item" style="opacity: 0.7; margin-bottom: 1rem;">
                                 <div>
@@ -101,9 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <span class="badge-old">OLD VERSION</span>
                                 </div>
                                 <span class="v-date">Publicado el ${item.date}</span>
-                                <span class="v-size">${item.size}</span>
-                                <a href="${downloadUrl}" class="v-dl-btn" style="opacity: 0.5; ${item.url === '#' ? 'pointer-events: none;' : ''}">
-                                    ${item.url === '#' ? 'ARCHIVO' : 'DESCARGAR'}
+                                <span class="v-size">${pData.size}</span>
+                                <a href="${downloadUrl}" class="v-dl-btn" style="opacity: 0.5; ${pData.url === '#' ? 'pointer-events: none;' : ''}">
+                                    ${pData.url === '#' ? 'ARCHIVO' : 'DESCARGAR'}
                                 </a>
                             </div>
                         `;
