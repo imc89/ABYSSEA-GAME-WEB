@@ -434,11 +434,19 @@ document.addEventListener('DOMContentLoaded', () => {
        5. REVELACIÓN DE ELEMENTOS (SCROLL REVEAL)
        ========================================================================= */
     function handleScrollReveal() {
-        const revealItems = document.querySelectorAll('.reveal:not(.active)');
+        const revealItems = document.querySelectorAll('.reveal');
         const windowHeight = window.innerHeight;
+        
         revealItems.forEach(item => {
-            if (item.getBoundingClientRect().top < windowHeight - 100) {
+            const rect = item.getBoundingClientRect();
+            // ES: Si el elemento está visible en la ventana (con un margen de 100px por debajo y sin desaparecer por arriba)
+            // EN: If the element is visible in the viewport (with 100px margin at bottom and not fully gone at top)
+            if (rect.top < windowHeight - 100 && rect.bottom > 0) {
                 item.classList.add('active');
+            } else {
+                // ES: Al salir de la vista, le quitamos la clase para que se vuelva a animar al volver
+                // EN: Remove the class when out of view so it animates again when returning
+                item.classList.remove('active');
             }
         });
     }
