@@ -1,16 +1,23 @@
+/* =============================================================================
+   ABYSSEA — style.css
+   -----------------------------------------------------------------------------
+   ES: Hoja de estilos principal: Diseño Base, Navegación, Hero y Componentes.
+   EN: Main stylesheet: Base Design, Navigation, Hero, and Components.
+   ============================================================================= */
+
 /* ============================
-   FUENTE GLECH
-============================= */
+   FUENTE GLECH (Custom Font)
+   ============================= */
 @font-face {
     font-family: 'Glech';
-    src: url('fonts/Glech/Glech Regular.otf') format('opentype');
+    src: url('../fonts/Glech/Glech Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 /* ============================
    VARIABLES & RESET
-============================= */
+   ============================= */
 :root {
     --deep: #020b14;
     --surface: #061829;
@@ -48,7 +55,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     /* Cursor personalizado */
-    cursor: url('cursor/cursor.cur'), auto;
+    cursor: url('../cursor/cursor.cur'), auto;
 }
 
 img {
@@ -74,7 +81,7 @@ button,
 .btn-cta-secondary,
 .gallery-item,
 .social-icon {
-    cursor: url('cursor/cursor_hover.cur'), pointer;
+    cursor: url('../cursor/cursor_hover.cur'), pointer;
 }
 
 .accent {
@@ -207,7 +214,7 @@ button,
     gap: 5px;
     background: none;
     border: none;
-    cursor: url('cursor/cursor_hover.cur'), pointer;
+    cursor: url('../cursor/cursor_hover.cur'), pointer;
 }
 
 .hamburger span {
@@ -603,7 +610,7 @@ button,
 .parallax-bg-layer {
     position: absolute;
     inset: -40px 0;
-    background: url('img/header.png') center/cover no-repeat;
+    background: url('../img/header.png') center/cover no-repeat;
     opacity: 0.12;
     filter: blur(2px) saturate(0.5);
     will-change: transform;
