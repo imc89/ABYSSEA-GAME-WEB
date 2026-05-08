@@ -7,7 +7,43 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================
-       1. CANVAS DE BURBUJAS ASCENDENTES
+       1. FETCH VERSIONS
+       ========================================== */
+    function updateDownloadButtons() {
+        console.log('Iniciando fetch de versiones...');
+        fetch('versions.json')
+            .then(response => {
+                if (!response.ok) throw new Error('No se pudo cargar versions.json (Error ' + response.status + ')');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos recibidos:', data);
+                const winBtn = document.getElementById('download-windows');
+                const macBtn = document.getElementById('download-macos');
+
+                if (winBtn && data.windows) {
+                    winBtn.href = data.windows.url;
+                    const v = winBtn.querySelector('.v-tag');
+                    const s = winBtn.querySelector('.s-tag');
+                    if (v) v.textContent = data.windows.version;
+                    if (s) s.textContent = data.windows.size;
+                }
+                if (macBtn && data.macos) {
+                    macBtn.href = data.macos.url;
+                    const v = macBtn.querySelector('.v-tag');
+                    const s = macBtn.querySelector('.s-tag');
+                    if (v) v.textContent = data.macos.version;
+                    if (s) s.textContent = data.macos.size;
+                }
+            })
+            .catch(err => {
+                console.error('Error en updateDownloadButtons:', err);
+            });
+    }
+    updateDownloadButtons();
+
+    /* ==========================================
+       2. CANVAS DE BURBUJAS ASCENDENTES
        ========================================== */
     (function initBubbles() {
         const canvas = document.getElementById('bubbles-canvas');
@@ -27,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function createBubble() {
             return {
                 x: Math.random() * W,
-                y: H + Math.random() * H,          // empieza fuera de pantalla abajo
+                y: H + Math.random() * H,
                 r: 1.5 + Math.random() * 5,
                 speed: 0.3 + Math.random() * 0.7,
                 drift: (Math.random() - 0.5) * 0.4,
@@ -39,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = 0; i < NUM_BUBBLES; i++) {
             const b = createBubble();
-            b.y = Math.random() * H;               // dispersión inicial
+            b.y = Math.random() * H;
             bubbles.push(b);
         }
 
@@ -49,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.strokeStyle = `rgba(56,189,248,${b.alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
-            // brillo interno
             ctx.beginPath();
             ctx.arc(b.x - b.r * 0.3, b.y - b.r * 0.3, b.r * 0.25, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(180,230,255,${b.alpha * 0.8})`;
@@ -64,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 b.y -= b.speed;
                 drawBubble(b);
                 if (b.y + b.r < 0) {
-                    bubbles[i] = createBubble(); // reciclar
+                    bubbles[i] = createBubble();
                 }
             });
             requestAnimationFrame(animate);
@@ -74,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================
-       2. PARALLAX — Hero + Stats banner
+       3. PARALLAX — Hero + Stats banner
        ========================================== */
     const heroParallax = document.getElementById('hero-parallax');
     const parallaxBgLayer = document.getElementById('parallax-bg-layer');
@@ -82,12 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function onScroll() {
         const sy = window.scrollY;
 
-        // Hero: la imagen sube más lento que el scroll
         if (heroParallax) {
             heroParallax.style.transform = `translateY(${sy * 0.35}px)`;
         }
 
-        // Stats banner: el fondo se mueve en sentido contrario
         if (parallaxBgLayer) {
             const banner = parallaxBgLayer.closest('.parallax-banner');
             if (banner) {
@@ -106,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================
-       3. NAVBAR — scroll effect + hamburger
+       4. NAVBAR — scroll effect + hamburger
        ========================================== */
     const navbar = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
@@ -126,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Smooth scroll para todos los enlaces internos
     document.querySelectorAll('a[href^="#"]').forEach(a => {
         a.addEventListener('click', e => {
             const target = document.querySelector(a.getAttribute('href'));
@@ -139,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================
-       4. SCROLL REVEAL
+       5. SCROLL REVEAL
        ========================================== */
     function revealElements() {
         const items = document.querySelectorAll('.reveal:not(.active)');
@@ -150,11 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    revealElements(); // disparo inicial
+    revealElements();
 
 
     /* ==========================================
-       5. DEPTH METER — anima al hacer scroll
+       6. DEPTH METER — anima al hacer scroll
        ========================================== */
     const depthFill = document.getElementById('depth-fill');
     let depthAnimated = false;
@@ -172,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================
-       6. GALLERY — lightbox
+       7. GALLERY — lightbox
        ========================================== */
     const lightbox = document.getElementById('lightbox');
     const lightboxBg = document.getElementById('lightbox-bg');
@@ -207,16 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lightboxBg) lightboxBg.addEventListener('click', closeLightbox);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-    // Primer disparo
     onScroll();
 
     /* ==========================================
-       7. PROTECCIÓN DE CONTENIDO
+       8. PROTECCIÓN DE CONTENIDO
        ========================================== */
-    // Bloquear clic derecho
     document.addEventListener('contextmenu', e => e.preventDefault());
-
-    // Bloquear combinaciones de teclas (Ctrl/Cmd + C, U, I, J)
     document.addEventListener('keydown', e => {
         if (
             (e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'u' || e.key === 'i' || e.key === 'j') ||

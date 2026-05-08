@@ -913,6 +913,58 @@ button,
     background: rgba(255, 255, 255, 0.06);
 }
 
+/* Download Buttons */
+.btn-download {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1rem 1.8rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    min-width: 240px;
+    text-align: left;
+}
+
+.btn-download:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px var(--glow);
+}
+
+.download-icon {
+    flex-shrink: 0;
+    color: var(--accent);
+}
+
+.download-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.download-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+}
+
+.download-details {
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+}
+
+.v-tag {
+    color: var(--teal);
+}
+
 .cta-platforms {
     display: flex;
     gap: 1rem;
