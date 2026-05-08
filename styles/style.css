@@ -10,7 +10,7 @@
    ============================= */
 @font-face {
     font-family: 'Glech';
-    src: url('../fonts/Glech/Glech Regular.otf') format('opentype');
+    src: url('../src/fonts/Glech/Glech Regular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -55,7 +55,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     /* Cursor personalizado */
-    cursor: url('../cursor/cursor.cur'), auto;
+    cursor: url('../src/cursor/cursor.cur'), auto;
 }
 
 img {
@@ -81,7 +81,7 @@ button,
 .btn-cta-secondary,
 .gallery-item,
 .social-icon {
-    cursor: url('../cursor/cursor_hover.cur'), pointer;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
 }
 
 .accent {
@@ -214,7 +214,7 @@ button,
     gap: 5px;
     background: none;
     border: none;
-    cursor: url('../cursor/cursor_hover.cur'), pointer;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
 }
 
 .hamburger span {
@@ -610,7 +610,7 @@ button,
 .parallax-bg-layer {
     position: absolute;
     inset: -40px 0;
-    background: url('../img/header.png') center/cover no-repeat;
+    background: url('../src/img/header.png') center/cover no-repeat;
     opacity: 0.12;
     filter: blur(2px) saturate(0.5);
     will-change: transform;
@@ -681,7 +681,7 @@ button,
     overflow: hidden;
     border-radius: 12px;
     border: 1px solid var(--border);
-    cursor: url('cursor/cursor_hover.cur'), pointer;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
     background: var(--card);
 }
 
@@ -820,7 +820,7 @@ button,
     justify-content: center;
     border-radius: 50%;
     color: #fff;
-    cursor: url('cursor/cursor_hover.cur'), pointer;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
     transition: all 0.3s ease;
     backdrop-filter: blur(12px);
     z-index: 100000;
@@ -893,7 +893,7 @@ button,
     letter-spacing: 0.08em;
     border: none;
     border-radius: 6px;
-    cursor: url('cursor/cursor_hover.cur'), pointer;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
     transition: box-shadow 0.3s, transform 0.3s;
 }
 
@@ -911,7 +911,7 @@ button,
     letter-spacing: 0.08em;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 6px;
-    cursor: url('cursor/cursor_hover.cur'), pointer;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
     transition: border-color 0.3s, background 0.3s;
 }
 

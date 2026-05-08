@@ -86,16 +86,38 @@
 
 /* ES: Enlace de retorno al inicio / EN: Back to home link */
 .back-link {
-    display: inline-block;
-    margin-bottom: 2rem;
-    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+    color: var(--text);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color 0.3s;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    background: rgba(56, 189, 248, 0.05);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+.back-link::before {
+    content: '←';
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
 }
 
 .back-link:hover {
     color: var(--accent);
+    background: rgba(56, 189, 248, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--glow);
+    transform: translateX(-5px);
+}
+
+.back-link:hover::before {
+    transform: translateX(-3px);
 }
 
 /* =========================================================================
