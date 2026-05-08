@@ -10,35 +10,29 @@ document.addEventListener('DOMContentLoaded', () => {
        1. FETCH VERSIONS
        ========================================== */
     function updateDownloadButtons() {
-        console.log('Iniciando fetch de versiones...');
-        fetch('versions.json')
-            .then(response => {
-                if (!response.ok) throw new Error('No se pudo cargar versions.json (Error ' + response.status + ')');
-                return response.json();
-            })
-            .then(data => {
-                console.log('Datos recibidos:', data);
-                const winBtn = document.getElementById('download-windows');
-                const macBtn = document.getElementById('download-macos');
+        // Usamos el objeto global definido en versions-data.js
+        if (typeof ABYSSEA_VERSIONS !== 'undefined') {
+            const data = ABYSSEA_VERSIONS;
+            const winBtn = document.getElementById('download-windows');
+            const macBtn = document.getElementById('download-macos');
 
-                if (winBtn && data.windows) {
-                    winBtn.href = data.windows.url;
-                    const v = winBtn.querySelector('.v-tag');
-                    const s = winBtn.querySelector('.s-tag');
-                    if (v) v.textContent = data.windows.version;
-                    if (s) s.textContent = data.windows.size;
-                }
-                if (macBtn && data.macos) {
-                    macBtn.href = data.macos.url;
-                    const v = macBtn.querySelector('.v-tag');
-                    const s = macBtn.querySelector('.s-tag');
-                    if (v) v.textContent = data.macos.version;
-                    if (s) s.textContent = data.macos.size;
-                }
-            })
-            .catch(err => {
-                console.error('Error en updateDownloadButtons:', err);
-            });
+            if (winBtn && data.windows) {
+                winBtn.href = data.windows.url;
+                const v = winBtn.querySelector('.v-tag');
+                const s = winBtn.querySelector('.s-tag');
+                if (v) v.textContent = data.windows.version;
+                if (s) s.textContent = data.windows.size;
+            }
+            if (macBtn && data.macos) {
+                macBtn.href = data.macos.url;
+                const v = macBtn.querySelector('.v-tag');
+                const s = macBtn.querySelector('.s-tag');
+                if (v) v.textContent = data.macos.version;
+                if (s) s.textContent = data.macos.size;
+            }
+        } else {
+            console.error('ABYSSEA_VERSIONS no está definido. Revisa versions-data.js');
+        }
     }
     updateDownloadButtons();
 
