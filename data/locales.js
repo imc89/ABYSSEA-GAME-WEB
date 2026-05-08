@@ -68,6 +68,13 @@ const ABYSSEA_LOCALES = {
         gallery_cap_4: "GESTIÓN DE SUMERGIBLE",
         gallery_cap_placeholder: "Vista Submarina",
 
+        // ES: Desarrollador (Developer)
+        dev_title: "UNA VISIÓN<br><span class=\"accent\">INDEPENDIENTE</span>",
+        dev_p1: "ABYSSEA no es el producto de un gran estudio corporativo, sino la visión inquebrantable de un único desarrollador. Diseñado, programado y esculpido en solitario para ofrecer una experiencia inmersiva sin compromisos ni presiones externas.",
+        dev_p2: "Cada criatura, cada línea de código y cada sonido del abismo ha sido meticulosamente creado con la pasión de demostrar que los mundos más inabarcables pueden nacer de la dedicación absoluta de una sola mente.",
+        dev_card_title: "SOLO DEV PROJECT",
+        dev_card_desc: "Desarrollo Independiente",
+
         // ES: Descargas (CTA/Download)
         dl_title: "¿Preparado para<br><span class=\"accent\">el Descenso?</span>",
         dl_desc: "ABYSSEA está en desarrollo activo. Añádelo a tu lista de deseos y sé el primero en explorar las profundidades cuando llegue el momento.",
@@ -161,6 +168,13 @@ const ABYSSEA_LOCALES = {
         gallery_cap_3: "IMMERSIVE EXPLORATION",
         gallery_cap_4: "SUBMERSIBLE MANAGEMENT",
         gallery_cap_placeholder: "Underwater View",
+
+        // EN: Desarrollador (Developer)
+        dev_title: "AN INDEPENDENT<br><span class=\"accent\">VISION</span>",
+        dev_p1: "ABYSSEA is not the product of a massive corporate studio, but the unwavering vision of a single developer. Designed, coded, and sculpted solo to deliver an immersive experience without compromises or external pressures.",
+        dev_p2: "Every creature, every line of code, and every sound of the abyss has been meticulously crafted with the passion to prove that the most boundless worlds can be born from the absolute dedication of a single mind.",
+        dev_card_title: "SOLO DEV PROJECT",
+        dev_card_desc: "Independent Development",
 
         // EN: Descargas (CTA/Download)
         dl_title: "Ready for<br><span class=\"accent\">the Descent?</span>",

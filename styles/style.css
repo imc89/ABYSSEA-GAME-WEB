@@ -483,6 +483,73 @@ button,
     transform: translateY(-2px);
 }
 
+/* ============================
+   DEVELOPER SECTION
+============================= */
+.section-developer {
+    position: relative;
+    z-index: 10;
+    padding: 100px 0;
+    background: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dev-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.dev-info {}
+
+.dev-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.dev-card {
+    background: var(--card);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(100, 168, 200, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.dev-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(100, 168, 200, 0.1), transparent 70%);
+    pointer-events: none;
+}
+
+.dev-icon {
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.dev-card h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.dev-card p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
 /* Depth Meter */
 .depth-meter {
     background: var(--card);
@@ -1180,12 +1247,12 @@ footer {
    RESPONSIVE
 ============================= */
 @media (max-width: 900px) {
-    .story-grid {
+    .story-grid, .dev-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
 
-    .story-text {
+    .story-text, .dev-info {
         text-align: center;
     }
 
