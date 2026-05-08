@@ -120,37 +120,7 @@
     transform: translateX(-3px);
 }
 
-/* =========================================================================
-   ETIQUETAS (BADGES)
-   ========================================================================= */
-.badge-latest,
-.badge-beta,
-.badge-old {
-    font-size: 0.65rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-}
-
-.badge-latest {
-    background: var(--teal);
-    color: var(--deep);
-}
-
-.badge-beta {
-    background: #facc15;
-    /* ES: Amarillo / EN: Yellow */
-    color: #000;
-}
-
-.badge-old {
-    background: rgba(100, 116, 139, 0.2);
-    color: var(--muted);
-    border: 1px solid rgba(100, 116, 139, 0.3);
-}
+/* ES: Los badges ahora son globales / EN: Badges are now global */
 
 /* =========================================================================
    COLORES BETA (BETA COLORS)

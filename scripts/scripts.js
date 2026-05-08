@@ -20,18 +20,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const macHomeBtn = document.getElementById('download-macos');
 
             // --- 1.1 Actualizar botones en Home (Update Home Buttons) ---
-            if (winHomeBtn && versions.latest && versions.latest.windows) {
-                const versionTag = winHomeBtn.querySelector('.v-tag');
-                const sizeTag = winHomeBtn.querySelector('.s-tag');
-                if (versionTag) versionTag.textContent = versions.latest.version;
-                if (sizeTag) sizeTag.textContent = versions.latest.windows.size;
-            }
-            if (macHomeBtn && versions.latest && versions.latest.macos) {
-                const versionTag = macHomeBtn.querySelector('.v-tag');
-                const sizeTag = macHomeBtn.querySelector('.s-tag');
-                if (versionTag) versionTag.textContent = versions.latest.version;
-                if (sizeTag) sizeTag.textContent = versions.latest.macos.size;
-            }
+            const updateHomeButton = (btn, platformKey) => {
+                if (!btn) return;
+                
+                // ES: Prioridad: Latest > Beta / EN: Priority: Latest > Beta
+                const isLatest = !!versions.latest;
+                const releaseData = isLatest ? versions.latest : versions.beta;
+                
+                if (releaseData && releaseData[platformKey]) {
+                    const versionTag = btn.querySelector('.v-tag');
+                    const sizeTag = btn.querySelector('.s-tag');
+                    const detailsContainer = btn.querySelector('.download-details');
+
+                    if (versionTag) versionTag.textContent = releaseData.version;
+                    if (sizeTag) sizeTag.textContent = releaseData[platformKey].size;
+
+                    // ES: Si es beta y no hay latest, añadir tag amarillo
+                    // EN: If it's beta and there's no latest, add yellow tag
+                    if (!isLatest && releaseData === versions.beta && detailsContainer) {
+                        // ES: Evitar duplicados / EN: Avoid duplicates
+                        if (!btn.querySelector('.badge-beta-home')) {
+                            const badge = document.createElement('span');
+                            badge.className = 'badge-beta badge-beta-home';
+                            badge.style.marginLeft = '10px';
+                            badge.style.fontSize = '0.6rem';
+                            badge.textContent = 'BETA';
+                            detailsContainer.appendChild(badge);
+                        }
+                    }
+                }
+            };
+
+            updateHomeButton(winHomeBtn, 'windows');
+            updateHomeButton(macHomeBtn, 'macos');
 
             // --- 1.2 Renderizar páginas de versiones (Render Version Pages) ---
             /**
