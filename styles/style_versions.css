@@ -120,37 +120,7 @@
     transform: translateX(-3px);
 }
 
-/* =========================================================================
-   ETIQUETAS (BADGES)
-   ========================================================================= */
-.badge-latest,
-.badge-beta,
-.badge-old {
-    font-size: 0.65rem;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-left: 0.5rem;
-    vertical-align: middle;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-}
-
-.badge-latest {
-    background: var(--teal);
-    color: var(--deep);
-}
-
-.badge-beta {
-    background: #facc15;
-    /* ES: Amarillo / EN: Yellow */
-    color: #000;
-}
-
-.badge-old {
-    background: rgba(100, 116, 139, 0.2);
-    color: var(--muted);
-    border: 1px solid rgba(100, 116, 139, 0.3);
-}
+/* ES: Los badges ahora son globales / EN: Badges are now global */
 
 /* =========================================================================
    COLORES BETA (BETA COLORS)
@@ -183,5 +153,158 @@
 
     .v-date {
         grid-column: 1 / 3;
+    }
+}
+
+/* =========================================================================
+   MODAL DE CAMBIOS (UPDATES MODAL)
+   ========================================================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 11, 20, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 3rem;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--glow);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.open .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 2rem;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--accent);
+}
+
+.modal-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.modal-changes-list {
+    list-style: none;
+    padding: 0;
+}
+
+.modal-changes-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+.modal-changes-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+/* ES: Evitar que el item de la lista sea interactivo al pasar el ratón (excepto el botón) */
+/* EN: Prevent the list item from being interactive on hover (except the button) */
+.version-item {
+    cursor: url('../src/cursor/cursor.cur'), default;
+}
+
+/* =========================================================================
+   ACCIONES DE VERSIÓN (VERSION ACTIONS)
+   ========================================================================= */
+.v-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.v-updates-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    transition: all 0.3s ease;
+}
+
+.v-updates-btn:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 10px var(--glow);
+}
+
+.v-updates-btn svg {
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.v-updates-btn:hover svg {
+    opacity: 1;
+}
+
+/* Ajuste del grid para móviles */
+@media (max-width: 768px) {
+    .v-actions {
+        grid-column: 1 / 3;
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .v-dl-btn,
+    .v-updates-btn {
+        flex: 1;
+        text-align: center;
+        justify-content: center;
     }
 }
