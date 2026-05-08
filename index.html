@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABYSSEA | Explora las Profundidades del Océano</title>
+    <meta name="description"
+        content="ABYSSEA es un videojuego de exploración de fondos oceánicos. Desciende al abismo, descubre ecosistemas alienígenas y sobrevive en la oscuridad.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Rajdhani:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Canvas de burbujas (fondo global) -->
+    <canvas id="bubbles-canvas"></canvas>
+
+    <!-- ============================
+     NAVBAR
+============================= -->
+    <header id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo font-glech" id="nav-logo-link">ABYSSEA</a>
+            <nav class="nav-links">
+                <a href="#story" class="nav-link">HISTORIA</a>
+                <a href="#features" class="nav-link">MECÁNICAS</a>
+                <a href="#gallery" class="nav-link">GALERÍA</a>
+                <a href="#cta" class="nav-link">CONTACTO</a>
+            </nav>
+            <a href="#cta" class="nav-cta-btn">JUGAR AHORA</a>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#story" class="mobile-link">HISTORIA</a>
+            <a href="#features" class="mobile-link">MECÁNICAS</a>
+            <a href="#gallery" class="mobile-link">GALERÍA</a>
+            <a href="#cta" class="mobile-link">ACCESO ANTICIPADO</a>
+        </div>
+    </header>
+
+    <!-- ============================
+     HERO — IMAGEN COMPLETA
+============================= -->
+    <section class="hero" id="hero">
+        <div class="hero-parallax" id="hero-parallax">
+            <img src="img/header.png" alt="ABYSSEA Logo" class="hero-img" id="hero-img">
+        </div>
+        <div class="hero-fade-bottom"></div>
+    </section>
+
+    <!-- ============================
+     TAGLINE BAJO EL HERO
+============================= -->
+    <section class="tagline-section">
+        <div class="tagline-inner">
+            <h1 class="tagline-title font-glech reveal">ABYSSEA</h1>
+            <p class="tagline-sub reveal reveal-delay-1">— EL ABISMO TE LLAMA —</p>
+            <div class="tagline-divider reveal reveal-delay-2"></div>
+            <p class="tagline-desc reveal reveal-delay-2">
+                Sumérgete en las fosas más profundas del océano. Explora ecosistemas
+                nunca vistos, analiza especies desconocidas y sobrevive donde la luz no llega.
+            </p>
+            <div class="hero-badges reveal reveal-delay-3">
+                <span class="badge">🎮 PC / Mac</span>
+                <span class="badge">🌊 Open World</span>
+                <span class="badge">🐟 Simulador de exploracion</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+     PARALLAX DIVIDER 1
+============================= -->
+    <div class="parallax-divider" id="parallax-div1">
+        <div class="parallax-layer" data-speed="0.3"
+            style="background: linear-gradient(180deg, #020b14 0%, #041524 100%);"></div>
+        <div class="parallax-text-overlay">
+            <span class="font-glech parallax-quote">"El mar no revela sus secretos a los impacientes"</span>
+        </div>
+    </div>
+
+    <!-- ============================
+     STORY SECTION
+============================= -->
+    <section id="story" class="section-story">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-text reveal">
+                    <h2 class="section-heading font-glech">La Oscuridad<br><span class="accent">Tiene Memoria</span>
+                    </h2>
+                    <p class="body-text">A 11.000 metros de profundidad, más allá de donde cualquier expedición humana
+                        ha llegado, yace algo que no debería existir. Estructuras que desafían la geología, señales
+                        acústicas con patrones imposibles, y organismos que parecen haber evolucionado de otra era.</p>
+                    <p class="body-text mt">Tu misión: analizar, sobrevivir, y descubrir la verdad antes de que los
+                        sistemas de tu batiscafo fallen.</p>
+                    <a href="#cta" class="btn-primary reveal reveal-delay-1">DESCUBRIR MÁS</a>
+                </div>
+                <div class="story-visual reveal reveal-delay-2">
+                    <div class="depth-meter">
+                        <div class="depth-bar">
+                            <div class="depth-fill" id="depth-fill"></div>
+                        </div>
+                        <div class="depth-markers">
+                            <div class="depth-marker"><span>200m</span><span class="marker-label">Zona
+                                    Crepuscular</span></div>
+                            <div class="depth-marker"><span>1.000m</span><span class="marker-label">Zona
+                                    Batipelágica</span></div>
+                            <div class="depth-marker"><span>4.000m</span><span class="marker-label">Zona Abisal</span>
+                            </div>
+                            <div class="depth-marker active"><span>11.000m</span><span
+                                    class="marker-label accent font-glech">ABYSSEA</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+     FEATURES SECTION
+============================= -->
+    <section id="features" class="section-features">
+        <div class="container">
+            <h2 class="section-heading font-glech text-center reveal">Mecánicas de <span class="accent">Inmersión</span>
+            </h2>
+            <p class="section-sub text-center reveal reveal-delay-1">Un sistema diseñado para que cada descenso sea
+                único</p>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 32 Q22 10 32 32 T52 32" stroke="currentColor" stroke-width="2" />
+                            <circle cx="22" cy="32" r="2" fill="currentColor" />
+                            <circle cx="42" cy="32" r="2" fill="currentColor" />
+                            <path d="M52 32 L58 28 M52 32 L58 36" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-glech feature-title">FAUNA ABISAL</h3>
+                    <p class="feature-desc">Descubre y estudia especies reales que habitan en la oscuridad absoluta.
+                        Cada
+                        encuentro es una oportunidad para aprender sobre la vida en condiciones extremas.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="16" stroke="currentColor" stroke-width="2" />
+                            <path
+                                d="M32 16 C32 16, 24 24, 24 32 C24 40, 32 48, 32 48 C32 48, 40 40, 40 32 C40 24, 32 16, 32 16Z"
+                                stroke="currentColor" stroke-width="2" />
+                            <circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.6" />
+                            <circle cx="44" cy="20" r="2" fill="currentColor" opacity="0.4" />
+                            <circle cx="18" cy="40" r="2.5" fill="currentColor" opacity="0.5" />
+                            <circle cx="46" cy="44" r="1.5" fill="currentColor" opacity="0.3" />
+                            <circle cx="32" cy="32" r="4" fill="currentColor" opacity="0.2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-glech feature-title">ECOSISTEMAS VIVOS</h3>
+                    <p class="feature-desc">Fauna bioluminiscente que reacciona a tu presencia. Las corrientes oceánicas
+                        cambian dinámicamente, creando entornos nunca idénticos entre partidas.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="32" cy="32" r="20" stroke="currentColor" stroke-width="2"
+                                stroke-dasharray="4 4" />
+                            <path d="M32 12 V52 M12 32 H52" stroke="currentColor" stroke-width="1" opacity="0.3" />
+                            <circle cx="32" cy="32" r="6" stroke="currentColor" stroke-width="2" />
+                            <path d="M32 26 L32 18 M32 38 L32 46 M26 32 L18 32 M38 32 L46 32" stroke="currentColor"
+                                stroke-width="2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-glech feature-title">EXPLORACIÓN INMERSIVA</h3>
+                    <p class="feature-desc">Un viaje sensorial diseñado para transmitir la inmensidad y el aislamiento
+                        del
+                        océano profundo. Siente la presión y el silencio del abismo.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="24" width="48" height="28" rx="4" stroke="currentColor" stroke-width="2" />
+                            <path d="M20 24 V16 Q32 8, 44 16 V24" stroke="currentColor" stroke-width="2" />
+                            <circle cx="32" cy="38" r="6" stroke="currentColor" stroke-width="2" />
+                            <line x1="32" y1="32" x2="32" y2="38" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-glech feature-title">GESTIÓN DE RECURSOS</h3>
+                    <p class="feature-desc">El oxígeno, la energía y la presión del casco son tus limitaciones reales.
+                        Cada decisión de exploración lleva un coste. Calcula antes de descender más.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="12" y="12" width="40" height="40" rx="2" stroke="currentColor" stroke-width="2" />
+                            <path d="M12 24 H52 M12 36 H52 M24 12 V52 M36 12 V52" stroke="currentColor" stroke-width="1"
+                                opacity="0.2" />
+                            <circle cx="32" cy="32" r="10" stroke="currentColor" stroke-width="2" />
+                            <path d="M28 32 L36 32 M32 28 L32 36" stroke="currentColor" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <h3 class="font-glech feature-title">SIMULACIÓN REALISTA</h3>
+                    <p class="feature-desc">Basado en datos oceanográficos reales, experimenta la física de las
+                        profundidades, desde la propagación de la luz hasta la presión hidrostática extrema.</p>
+                </div>
+
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 40 L20 20 L30 40 L40 20 L50 40" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                            <circle cx="20" cy="20" r="3" fill="currentColor" />
+                            <circle cx="40" cy="20" r="3" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <h3 class="font-glech feature-title">CATÁLOGO DE ESPECIES</h3>
+                    <p class="feature-desc">Tu principal objetivo: documentar la biodiversidad del abismo. Fotografía y
+                        cataloga nuevas formas de vida para expandir el conocimiento humano.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+     PARALLAX STATS BANNER
+============================= -->
+    <div class="parallax-banner" id="parallax-banner">
+        <div class="parallax-bg-layer" id="parallax-bg-layer"></div>
+        <div class="parallax-banner-content">
+            <div class="stat-grid">
+                <div class="stat-item reveal">
+                    <div class="stat-number font-glech">11<span class="accent">km</span></div>
+                    <div class="stat-label">Profundidad máxima</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-1">
+                    <div class="stat-number font-glech">200<span class="accent">+</span></div>
+                    <div class="stat-label">Especies descubribles</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-2">
+                    <div class="stat-number font-glech">∞</div>
+                    <div class="stat-label">Mundos generados</div>
+                </div>
+                <div class="stat-item reveal reveal-delay-3">
+                    <div class="stat-number font-glech">1<span class="accent">%</span></div>
+                    <div class="stat-label">Del océano explorado</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================
+     GALLERY SECTION
+============================= -->
+    <section id="gallery" class="section-gallery">
+        <div class="container">
+            <h2 class="section-heading font-glech text-center reveal">CAPTURAS DEL <span class="accent">ABISMO</span>
+            </h2>
+            <p class="section-sub text-center reveal reveal-delay-1">Vistas del mundo submarino que te espera</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item gallery-item--large reveal" data-index="0">
+                <div class="gallery-img-wrap">
+                    <img src="img/header.png" alt="ABYSSEA - Logo principal" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption font-glech">El Logo del Abismo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-1" data-index="1">
+                <div class="gallery-img-wrap gallery-placeholder" style="--c1:#041524;--c2:#0c3a5c;">
+                    <div class="placeholder-content">
+                        <div class="placeholder-icon">🌊</div>
+                        <span class="font-glech placeholder-label">Zona Batipelágica</span>
+                    </div>
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption font-glech">Zona Batipelágica</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-2" data-index="2">
+                <div class="gallery-img-wrap">
+                    <img src="img/ANOPLOGASTER.gif" alt="ABYSSEA - Criatura Abisal" loading="lazy" class="img-contain">
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption font-glech">CRIATURA ABISAL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-1" data-index="3">
+                <div class="gallery-img-wrap">
+                    <img src="img/exploracion.png" alt="ABYSSEA - Exploración" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption font-glech">EXPLORACIÓN INMERSIVA</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-item reveal reveal-delay-2" data-index="4">
+                <div class="gallery-img-wrap">
+                    <img src="img/management.png" alt="ABYSSEA - Gestión de sumergible" loading="lazy">
+                    <div class="gallery-overlay">
+                        <span class="gallery-caption font-glech">GESTIÓN DE SUMERGIBLE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- ============================
+     CTA SECTION
+============================= -->
+    <section id="cta" class="section-cta">
+        <div class="cta-particles" id="cta-particles"></div>
+        <div class="container cta-inner">
+            <h2 class="font-glech cta-title reveal">¿Preparado para<br><span class="accent">el Descenso?</span></h2>
+            <p class="cta-sub reveal reveal-delay-1">ABYSSEA está en desarrollo activo. Añádelo a tu lista de deseos y
+                sé el primero en explorar las profundidades cuando llegue el momento.</p>
+            <div class="cta-actions reveal reveal-delay-2">
+                <a href="https://github.com/imc89/ABYSSEA" target="_blank" rel="noopener noreferrer"
+                    class="btn-cta-primary github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                    </svg>
+                    VER EN GITHUB
+                </a>
+            </div>
+            <div class="cta-platforms reveal reveal-delay-3">
+                <span class="platform-badge">
+                    <!-- Windows logo -->
+                    <svg width="16" height="16" viewBox="0 0 88 88" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M0 12.402l35.687-4.86.016 34.423-35.67.202zm35.67 33.529l.028 34.453L.028 75.48l-.01-29.644zm4.326-39.025L87.314 0v41.527l-47.318.376zm47.329 39.349l-.015 41.307-47.318-6.677-.066-34.78z" />
+                    </svg>
+                    Windows
+                </span>
+                <span class="platform-badge">
+                    <!-- Apple logo -->
+                    <svg width="15" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                    </svg>
+                    macOS
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+     FOOTER
+============================= -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="font-glech footer-logo">ABYSSEA</span>
+                <p class="footer-tagline">Explora las profundidades. Descubre la verdad.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#story">Historia</a>
+                <a href="#features">Mecánicas</a>
+                <a href="#gallery">Galería</a>
+                <a href="#">Prensa</a>
+                <a href="#">Privacidad</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon" aria-label="Twitter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="Discord">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057.1 18.08.11 18.1.127 18.114a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z" />
+                    </svg>
+                </a>
+                <a href="#" class="social-icon" aria-label="YouTube">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Deep Water Games S.L. — Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-bg" id="lightbox-bg"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" />
+                </svg>
+            </button>
+            <img src="" alt="" id="lightbox-img" class="lightbox-img">
+            <p class="lightbox-caption font-glech" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>

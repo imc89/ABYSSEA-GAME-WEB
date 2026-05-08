@@ -1,0 +1,14 @@
+{
+  "name": "abyssea-web",
+  "version": "1.0.0",
+  "description": "Web oficial de ABYSSEA - Explora las profundidades del océano",
+  "scripts": {
+    "dev": "npx serve .",
+    "deploy": "gh-pages -d ."
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0",
+    "serve": "^14.2.3"
+  },
+  "homepage": "https://deepwatergames.github.io/abyssea"
+}
