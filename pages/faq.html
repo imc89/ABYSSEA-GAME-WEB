@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | ABYSSEA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Rajdhani:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/style_versions.css">
+    <link rel="icon" type="image/svg+xml" href="../src/img/favicon/favicon.svg">
+    <style>
+        .page-content {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+        }
+        .faq-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .faq-item {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: var(--accent-color);
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .faq-answer-inner {
+            padding: 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bubbles-canvas"></canvas>
+
+    <div class="page-content">
+        <div class="container">
+            <a href="../index.html" class="back-link" data-i18n="ver_back_btn">Volver al inicio</a>
+
+            <header class="faq-header reveal">
+                <h1 class="section-heading font-glech" data-i18n="faq_title">PREGUNTAS <span class="accent">FRECUENTES</span></h1>
+                <p class="section-sub" data-i18n="faq_sub">Todo lo que necesitas saber antes de sumergirte</p>
+            </header>
+
+            <div class="faq-accordion reveal reveal-delay-1">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q1">¿Cuándo saldrá la versión final?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner" data-i18n="faq_a1">
+                            ABYSSEA se encuentra actualmente en desarrollo activo. El acceso anticipado (Early Access) nos permite iterar sobre las mecánicas basándonos en el feedback de la comunidad.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q2">¿Tendrá soporte para VR?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner" data-i18n="faq_a2">
+                            La inmersión es clave en ABYSSEA. Aunque el lanzamiento inicial no incluirá VR nativo, es uno de los principales hitos en nuestra hoja de ruta para futuras actualizaciones.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q3">¿Habrá modo cooperativo?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner" data-i18n="faq_a3">
+                            La experiencia base está diseñada para un solo jugador, para enfatizar la sensación de soledad y aislamiento. Sin embargo, no descartamos modos adicionales en el futuro.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span data-i18n="faq_q4">¿Dónde puedo reportar un bug?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner" data-i18n="faq_a4">
+                            Puedes utilizar nuestro canal oficial de Discord o acceder a la sección de Feedback directamente desde el menú principal del juego.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../data/locales/common_locales.js"></script>
+    <script src="../data/locales/faq_locales.js"></script>
+    <script src="../scripts/scripts.js"></script>
+    <script>
+        // Accordion Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all
+                    faqItems.forEach(faq => {
+                        faq.classList.remove('active');
+                        faq.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+                    
+                    // Open clicked if it wasn't active
+                    if (!isActive) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
