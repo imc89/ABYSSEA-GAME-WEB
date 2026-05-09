@@ -33,8 +33,9 @@
                 <a href="#about" class="v-link" data-i18n="nav_about">INICIO</a>
                 <a href="#features" class="nav-link" data-i18n="nav_mechanics">JUGABILIDAD</a>
                 <a href="#gallery" class="nav-link" data-i18n="nav_gallery">GALERÍA</a>
-                <a href="#" class="nav-link" data-i18n="nav_news">NOTICIAS</a>
-                <a href="#" class="nav-link" data-i18n="nav_support">AYUDA / SOPORTE</a>
+                <a href="pages/news.html" class="nav-link" data-i18n="nav_news">NOTICIAS</a>
+                <a href="pages/about.html" class="nav-link" data-i18n="nav_about_page">ABOUT</a>
+                <a href="pages/faq.html" class="nav-link" data-i18n="nav_support">AYUDA / SOPORTE</a>
             </nav>
 
             <div class="nav-actions">
@@ -54,8 +55,9 @@
             <a href="#about" class="mobile-link" data-i18n="nav_about">INICIO</a>
             <a href="#features" class="mobile-link" data-i18n="nav_mechanics">JUGABILIDAD</a>
             <a href="#gallery" class="mobile-link" data-i18n="nav_gallery">GALERÍA</a>
-            <a href="#" class="mobile-link" data-i18n="nav_news">NOTICIAS</a>
-            <a href="#" class="mobile-link" data-i18n="nav_support">AYUDA / SOPORTE</a>
+            <a href="pages/news.html" class="mobile-link" data-i18n="nav_news">NOTICIAS</a>
+            <a href="pages/about.html" class="mobile-link" data-i18n="nav_about_page">ABOUT</a>
+            <a href="pages/faq.html" class="mobile-link" data-i18n="nav_support">AYUDA / SOPORTE</a>
             <a href="#cta" class="mobile-link" data-i18n="nav_early_access">ACCESO ANTICIPADO</a>
 
             <div class="mobile-lang-switcher">
@@ -89,9 +91,23 @@
                 nunca vistos, analiza especies desconocidas y sobrevive donde la luz no llega.
             </p>
             <div class="hero-badges reveal reveal-delay-3">
-                <span class="badge" data-i18n="badge_platforms">🎮 PC / Mac</span>
-                <span class="badge" data-i18n="badge_genre">🌊 Mundo Abierto</span>
-                <span class="badge" data-i18n="badge_simulator">Submarino</span>
+                <span class="badge" data-i18n="badge_platforms">
+                    <i data-lucide="monitor" style="width: 18px; height: 18px;"></i>
+                    PC / Mac</span>
+                <span class="badge" data-i18n="badge_genre">
+                    <i data-lucide="earth" style="width: 18px; height: 18px;"></i>
+                    Mundo Abierto</span>
+                <span class="badge" data-i18n="badge_fauna">
+                    <i data-lucide="fish" style="width: 18px; height: 18px;"></i>
+                    Especies Abisales</span>
+                <span class="badge" data-i18n="badge_simulator">
+                    <svg width="26" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -4px; margin-right: 6px;">
+                        <path d="M3 11v6h2l1 -1.5l3 1.5h10a3 3 0 0 0 0 -6h-10l-3 1.5l-1 -1.5h-2z" />
+                        <path d="M17 11l-1 -3h-5l-1 3" />
+                        <path d="M13 8v-2a1 1 0 0 1 1 -1h1" />
+                    </svg>
+                    Simulador de Batiscafo</span>
             </div>
         </div>
     </section>
@@ -358,31 +374,7 @@
         </div>
     </section>
 
-    <!-- ============================
-     ABOUT DEVELOPER SECTION
-============================= -->
-    <section id="developer" class="section-developer">
-        <div class="container">
-            <div class="dev-grid">
-                <div class="dev-info reveal">
-                    <h2 class="section-heading font-glech" data-i18n="dev_title">UNA VISIÓN<br><span class="accent">INDEPENDIENTE</span></h2>
-                    <p class="body-text" data-i18n="dev_p1">ABYSSEA no es el producto de un gran estudio corporativo, sino la visión inquebrantable de un único desarrollador. Diseñado, programado y esculpido en solitario para ofrecer una experiencia inmersiva sin compromisos ni presiones externas.</p>
-                    <p class="body-text" data-i18n="dev_p2">Cada criatura, cada línea de código y cada sonido del abismo ha sido meticulosamente creado con la pasión de demostrar que los mundos más inabarcables pueden nacer de la dedicación absoluta de una sola mente.</p>
-                </div>
-                <div class="dev-visual reveal reveal-delay-1">
-                    <div class="dev-card">
-                        <div class="dev-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                            </svg>
-                        </div>
-                        <h3 class="font-glech" data-i18n="dev_card_title">SOLO DEV PROJECT</h3>
-                        <p data-i18n="dev_card_desc">Desarrollo Independiente</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- ============================
      CTA SECTION
@@ -428,6 +420,25 @@
     </section>
 
     <!-- ============================
+     TOOLS SECTION
+============================= -->
+    <section class="section-tools reveal">
+        <div class="container">
+            <div class="bright-separator"></div>
+            <h3 class="font-glech tools-title" data-i18n="tools_title">HERRAMIENTAS</h3>
+            <div class="tools-grid">
+                <img src="src/img/tools_icons/electron.png" alt="Electron" class="tool-icon" title="Electron">
+                <img src="src/img/tools_icons/html5.png" alt="HTML5" class="tool-icon" title="HTML5">
+                <img src="src/img/tools_icons/css3.png" alt="CSS3" class="tool-icon" title="CSS3">
+                <img src="src/img/tools_icons/js-es6.png" alt="JavaScript ES6" class="tool-icon"
+                    title="JavaScript ES6+">
+                <img src="src/img/tools_icons/lucide.png" alt="Lucide Icons" class="tool-icon" title="Lucide Icons">
+                <img src="src/img/tools_icons/gh-pages.png" alt="GitHub Pages" class="tool-icon" title="GitHub Pages">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
      FOOTER
 ============================= -->
     <footer>
@@ -437,11 +448,10 @@
                 <p class="footer-tagline" data-i18n="footer_tagline">Explora las profundidades. Descubre la verdad.</p>
             </div>
             <div class="footer-links">
-                <a href="#story" data-i18n="nav_story">Historia</a>
-                <a href="#features" data-i18n="nav_mechanics">Mecánicas</a>
-                <a href="#gallery" data-i18n="nav_gallery">Galería</a>
-                <a href="#" data-i18n="footer_press">Prensa</a>
+                <a href="#" data-i18n="footer_press">Press Kit</a>
                 <a href="#" data-i18n="footer_privacy">Privacidad</a>
+                <a href="#" data-i18n="footer_terms">Términos de Servicio</a>
+                <a href="#" data-i18n="footer_contact">Contacto</a>
             </div>
             <div class="footer-social">
                 <a href="#" class="social-icon" aria-label="Twitter">
@@ -484,7 +494,8 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="data/locales.js?v=1.0.1"></script>
+    <script src="data/locales/common_locales.js"></script>
+    <script src="data/locales/index_locales.js"></script>
     <script src="data/versions-data.js?v=1.0.1"></script>
     <script src="scripts/scripts.js?v=1.0.1"></script>
 </body>

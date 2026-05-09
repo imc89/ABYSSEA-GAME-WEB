@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =========================================================================
        0. UTILIDADES GLOBALES (GLOBAL UTILITIES)
        ========================================================================= */
-    
+
     /**
      * ES: Detecta si el usuario está en un dispositivo móvil.
      * EN: Detects if the user is on a mobile device.
@@ -31,21 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.id = 'compatibility-modal';
             modal.className = 'modal-overlay';
             modal.innerHTML = `
-                <div class="modal-content" style="text-align: center; border-color: #ef4444;">
+                <div class="modal-content" style="text-align: center; border-color: var(--border-color); background: var(--bg-dark);">
                     <button class="modal-close">&times;</button>
-                    <h2 class="font-glech modal-title" style="color: #ef4444;" data-i18n="modal_comp_title"></h2>
-                    <p style="margin-bottom: 2rem; line-height: 1.6;" data-i18n="modal_comp_desc"></p>
-                    <button class="v-dl-btn modal-close-btn" style="width: 100%;" data-i18n="modal_comp_btn"></button>
+                    <div style="margin-bottom: 1.5rem; color: var(--text-color); opacity: 0.8;">
+                        <i data-lucide="smartphone-off" style="width: 48px; height: 48px;"></i>
+                    </div>
+                    <h2 class="font-glech modal-title" style="color: var(--text-color);" data-i18n="modal_comp_title"></h2>
+                    <p style="margin-bottom: 2rem; line-height: 1.6; color: var(--text-muted);" data-i18n="modal_comp_desc"></p>
+                    <button class="nav-cta-btn modal-close-btn" style="width: 100%; border: none; font-size: 1rem; cursor: pointer;" data-i18n="modal_comp_btn"></button>
                 </div>
             `;
             document.body.appendChild(modal);
-            
+
             const close = () => modal.classList.remove('open');
             modal.querySelector('.modal-close').addEventListener('click', close);
             modal.querySelector('.modal-close-btn').addEventListener('click', close);
             modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
         }
-        updateUILanguage(); 
+        updateUILanguage();
         modal.classList.add('open');
     };
 
@@ -74,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.innerHTML = texts[key];
             }
         });
+        
+        // ES: Procesar iconos de Lucide / EN: Process Lucide icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
 
         // ES: Actualizar estado visual de los botones / EN: Update buttons visual state
         document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -83,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ES: Actualizar idioma de la página (SEO) / EN: Update page lang (SEO)
         document.documentElement.lang = currentLang;
-        
+
         // ES: Guardar preferencia / EN: Save preference
         localStorage.setItem('abyssea_lang', currentLang);
 
@@ -98,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentLang === lang) return;
         currentLang = lang;
         updateUILanguage();
-        
+
         document.body.style.opacity = '0.5';
         setTimeout(() => {
             document.body.style.opacity = '1';
@@ -108,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeVersionManagement() {
         if (typeof ABYSSEA_VERSIONS !== 'undefined') {
             const versions = ABYSSEA_VERSIONS;
-            
+
             // ES: Referencias a botones de descarga en la Home
             // EN: References to download buttons on the Home page
             const winHomeBtn = document.getElementById('download-windows');
@@ -117,12 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // --- 1.1 Actualizar botones en Home (Update Home Buttons) ---
             const updateHomeButton = (btn, platformId) => {
                 if (!btn) return;
-                
+
                 const texts = ABYSSEA_LOCALES[currentLang];
                 const isLatest = !!versions.latest;
                 const releaseData = isLatest ? versions.latest : versions.beta;
                 const dataKey = platformId === 'win' ? 'windows' : 'macos';
-                
+
                 if (releaseData && releaseData[dataKey]) {
                     const platformData = releaseData[dataKey];
                     const versionTag = btn.querySelector('.v-tag');
@@ -133,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (versionTag) versionTag.textContent = releaseData.version;
                     if (sizeTag) sizeTag.textContent = platformData.size;
                     if (titleTag) titleTag.textContent = texts[`dl_title_${platformId}`];
-                    
+
                     if (!isLatest && releaseData === versions.beta && detailsContainer) {
                         if (!btn.querySelector('.badge-beta-home')) {
                             const badge = document.createElement('span');
@@ -167,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const pData = data[platform];
                     const downloadUrl = pData.url.startsWith('http') ? pData.url : pathPrefix + pData.url;
                     const changesAttr = data.changes ? data.changes.replace(/"/g, '&quot;') : '';
-                    
+
                     const btnText = typeClass === 'old' && pData.url === '#' ? texts.ver_btn_archive : (typeClass === 'beta' ? texts.ver_btn_beta : texts.ver_btn_dl);
 
                     return `
@@ -242,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
              */
             function showUpdatesModal(version, changesString) {
                 let modal = document.getElementById('updates-modal');
-                
+
                 // ES: Crear modal si no existe / EN: Create modal if it doesn't exist
                 if (!modal) {
                     modal = document.createElement('div');
@@ -256,21 +262,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     `;
                     document.body.appendChild(modal);
-                    
+
                     modal.querySelector('.modal-close').addEventListener('click', () => modal.classList.remove('open'));
                     modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
                 }
 
                 const list = modal.querySelector('#modal-changes-list');
                 const vNum = modal.querySelector('#modal-v-num');
-                
+
                 vNum.textContent = version.toUpperCase();
-                
+
                 // ES: Procesar cambios (separados por guiones)
                 // EN: Process changes (separated by dashes)
                 const changesArray = changesString.split('-').map(s => s.trim()).filter(s => s.length > 0);
                 list.innerHTML = changesArray.map(change => `<li>${change}</li>`).join('');
-                
+
                 modal.classList.add('open');
                 document.body.style.overflow = 'hidden'; // ES: Bloquear scroll / EN: Lock scroll
             }
@@ -332,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.strokeStyle = `rgba(56,189,248,${b.alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
-            
+
             // ES: Reflejo luminoso / EN: Light highlight
             ctx.beginPath();
             ctx.arc(b.x - b.radius * 0.3, b.y - b.radius * 0.3, b.radius * 0.25, 0, Math.PI * 2);
@@ -347,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 b.x += b.drift + Math.sin(b.wobble) * 0.4;
                 b.y -= b.verticalSpeed;
                 drawBubble(b);
-                
+
                 // ES: Reposicionar si sale de la pantalla / EN: Reposition if off screen
                 if (b.y + b.radius < 0) {
                     bubblesList[index] = createNewBubble();
@@ -419,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ES: Navegación interna suave / EN: Smooth internal navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
@@ -436,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleScrollReveal() {
         const revealItems = document.querySelectorAll('.reveal');
         const windowHeight = window.innerHeight;
-        
+
         revealItems.forEach(item => {
             const rect = item.getBoundingClientRect();
             // ES: Si el elemento está visible en la ventana (con un margen de 100px por debajo y sin desaparecer por arriba)
@@ -463,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isDepthAnimated || !depthMeterFill) return;
         const meterContainer = depthMeterFill.closest('.depth-meter');
         if (!meterContainer) return;
-        
+
         const containerPosition = meterContainer.getBoundingClientRect().top;
         if (containerPosition < window.innerHeight - 80) {
             depthMeterFill.style.height = '100%';
@@ -507,10 +513,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (lightboxCloseBtn) lightboxCloseBtn.addEventListener('click', closeFullImage);
     if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeFullImage);
-    
+
     // ES: Atajos de teclado / EN: Keyboard shortcuts
-    document.addEventListener('keydown', e => { 
-        if (e.key === 'Escape') closeFullImage(); 
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeFullImage();
     });
 
     // ES: Inicialización de estado inicial / EN: Initial state initialization
@@ -521,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================================= */
     // ES: Bloquear clic derecho / EN: Disable right click
     document.addEventListener('contextmenu', e => e.preventDefault());
-    
+
     // ES: Bloquear teclas de desarrollador (F12, Inspeccionar, etc)
     // EN: Disable developer shortcuts (F12, Inspect, etc)
     document.addEventListener('keydown', e => {

@@ -1,0 +1,255 @@
+/* =============================================================================
+   ABYSSEA — style_news.css
+   -----------------------------------------------------------------------------
+   ES: Estilos específicos para la página de Noticias.
+   EN: Specific styles for the News page.
+   ============================================================================= */
+
+.news-page {
+    padding: 120px 2rem 60px;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #0b3050 0%, var(--deep) 100%);
+    background-attachment: fixed;
+}
+
+.news-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.news-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ES: Contenedor individual de la noticia */
+.news-card {
+    background: rgba(10, 34, 53, 0.4);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.news-card:hover {
+    border-color: rgba(56, 189, 248, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ES: Vista resumida (Siempre visible) */
+.news-summary {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+}
+
+.news-thumb-wrapper {
+    overflow: hidden;
+    position: relative;
+    border-right: 1px solid var(--border);
+}
+
+.news-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: grayscale(30%);
+}
+
+.news-card:hover .news-thumb {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+.news-excerpt {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.news-date {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.news-card-title {
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+.news-desc {
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.news-expand-btn {
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    transition: all 0.3s ease;
+}
+
+/* ES: Estilos para la Modal de Noticias (News Modal Styles) */
+.news-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 11, 20, 0.9);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 2rem;
+}
+
+.news-modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.news-modal-content {
+    background: var(--card);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.1);
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.news-modal-overlay.open .news-modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.news-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(10, 34, 53, 0.8);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.news-modal-close:hover {
+    background: var(--accent);
+    color: var(--deep);
+    transform: rotate(90deg);
+}
+
+.news-modal-body {
+    padding: 3rem;
+    overflow-y: auto;
+    color: var(--text);
+}
+
+.news-modal-date {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: block;
+    letter-spacing: 2px;
+}
+
+.news-modal-title {
+    font-size: 2.5rem;
+    color: var(--text);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+}
+
+.news-content-inner {
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.news-content-inner p {
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.news-content-inner p:last-child {
+    margin-bottom: 0;
+}
+
+.news-content-inner strong {
+    color: var(--accent);
+}
+
+/* ES: Media flexible dentro de la noticia (Flexible media inside news) */
+.news-content-inner img,
+.news-content-inner video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border);
+    display: block;
+}
+
+.news-content-inner h4 {
+    color: var(--accent);
+    margin: 2rem 0 1rem 0;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .news-summary {
+        grid-template-columns: 1fr;
+    }
+    .news-thumb-wrapper {
+        height: 200px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    .news-modal-body {
+        padding: 1.5rem;
+    }
+    .news-modal-title {
+        font-size: 1.8rem;
+    }
+    .news-modal-overlay {
+        padding: 1rem;
+    }
+}
