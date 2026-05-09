@@ -16,7 +16,7 @@
 /* ES: Encabezado con título y descripción / EN: Header with title and description */
 .version-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
 }
 
 /* ES: Lista que agrupa todos los ítems de versión / EN: List grouping all version items */
@@ -149,19 +149,21 @@
     .versions-container {
         padding: 2rem 1.5rem;
     }
-    
+
     .font-glech {
-        font-size: 2.2rem; /* ES: Título principal más pequeño / EN: Smaller main title */
+        font-size: 2.2rem;
+        /* ES: Título principal más pequeño / EN: Smaller main title */
     }
 }
 
 @media (max-width: 650px) {
     .version-page {
-        padding: 80px 1rem 40px; /* ES: Menos espacio arriba / EN: Less space top */
+        padding: 80px 1rem 40px;
+        /* ES: Menos espacio arriba / EN: Less space top */
     }
 
     .version-header {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .back-link {
@@ -174,7 +176,7 @@
 
     /* ES: Reducir espacio entre secciones / EN: Reduce section gap */
     h3.font-glech {
-        margin-top: 1.5rem !important; 
+        margin-top: 1.5rem !important;
         margin-bottom: 1rem !important;
     }
 
@@ -206,24 +208,28 @@
         font-size: 1.5rem;
     }
 
-    .v-date, .v-size {
+    .v-date,
+    .v-size {
         font-size: 0.85rem;
         opacity: 0.8;
     }
 
     .v-actions {
         width: 100%;
-        flex-direction: column; /* ES: Botones en columna / EN: Buttons in column */
+        flex-direction: column;
+        /* ES: Botones en columna / EN: Buttons in column */
         gap: 0.8rem;
     }
 
-    .v-dl-btn, .v-updates-btn {
+    .v-dl-btn,
+    .v-updates-btn {
         width: 100%;
         justify-content: center;
         text-align: center;
         display: flex;
         align-items: center;
-        padding: 1rem; /* ES: Botones más grandes para dedos / EN: Larger buttons for fingers */
+        padding: 1rem;
+        /* ES: Botones más grandes para dedos / EN: Larger buttons for fingers */
         font-size: 0.9rem;
     }
 
@@ -236,7 +242,7 @@
     .modal-title {
         font-size: 1.5rem;
     }
-    
+
     .modal-close {
         top: 1rem;
         right: 1rem;
