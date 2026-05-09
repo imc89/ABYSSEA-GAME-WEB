@@ -1166,10 +1166,19 @@ button,
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 2.5rem;
     flex-wrap: wrap;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+.tool-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    text-decoration: none;
+    transition: all 0.4s ease;
 }
 
 .tool-icon {
@@ -1180,7 +1189,7 @@ button,
     transition: all 0.4s ease;
 }
 
-.tool-icon:hover {
+.tool-link:hover .tool-icon {
     filter: grayscale(0%) opacity(1);
     transform: translateY(-5px);
 }
@@ -1190,13 +1199,27 @@ button,
     height: 80px;
 }
 
-.tool-icon[alt="HTML5 & CSS3"] {
+.tool-icon[alt="Node.js"] {
+    height: 65px;
+}
+
+.tool-icon[alt="NPM"] {
+    height: 40px; /* Usually wider */
+    margin-top: 20px;
+}
+
+.tool-icon[alt="HTML5"],
+.tool-icon[alt="CSS3"] {
     height: 70px;
 }
 
 .tool-icon[alt="JavaScript ES6"] {
     height: 70px;
     border-radius: 8px;
+}
+
+.tool-icon[alt="DragonBones"] {
+    height: 75px;
 }
 
 .tool-icon[alt="Lucide Icons"] {
@@ -1213,27 +1236,40 @@ button,
     }
 
     .tool-icon {
-        height: 50px;
+        height: 45px;
     }
 
     .tool-icon[alt="Electron"] {
-        height: 60px;
+        height: 55px;
     }
 
-    .tool-icon[alt="HTML5 & CSS3"] {
-        height: 50px;
+    .tool-icon[alt="Node.js"] {
+        height: 45px;
+    }
+
+    .tool-icon[alt="NPM"] {
+        height: 30px;
+    }
+
+    .tool-icon[alt="HTML5"],
+    .tool-icon[alt="CSS3"] {
+        height: 45px;
     }
 
     .tool-icon[alt="JavaScript ES6"] {
+        height: 45px;
+    }
+
+    .tool-icon[alt="DragonBones"] {
         height: 50px;
     }
 
     .tool-icon[alt="Lucide Icons"] {
-        height: 45px;
+        height: 40px;
     }
 
     .tool-icon[alt="GitHub Pages"] {
-        height: 55px;
+        height: 50px;
     }
 }
 
