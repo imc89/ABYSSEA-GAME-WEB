@@ -1204,7 +1204,8 @@ button,
 }
 
 .tool-icon[alt="NPM"] {
-    height: 40px; /* Usually wider */
+    height: 40px;
+    /* Usually wider */
     margin-top: 20px;
 }
 
