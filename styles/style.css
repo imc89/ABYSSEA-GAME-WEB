@@ -369,27 +369,7 @@ button,
     line-height: 1.8;
 }
 
-.hero-badges {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
 
-.badge {
-    padding: 0.45rem 1.2rem;
-    border: 1px solid var(--border);
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--muted);
-    background: var(--deep);
-    /* Fondo sólido para bloquear burbujas */
-    letter-spacing: 0.05em;
-    position: relative;
-    z-index: 15;
-    /* Prioridad */
-}
 
 /* ============================
    PARALLAX QUOTE DIVIDER
@@ -618,18 +598,18 @@ button,
 /* ============================
    FEATURES SECTION
 ============================= */
+/* ============================
+   FEATURES SECTION (Original Horizontal Grid)
+============================= */
 .section-features {
     position: relative;
     z-index: 10;
     padding: 100px 0;
     background: rgba(6, 24, 41, 0.65);
-    /* var(--surface) pero transparente */
 }
 
 .section-features::before,
-.section-features::after,
-.section-cta::before,
-.section-cta::after {
+.section-features::after {
     content: '';
     position: absolute;
     left: 0;
@@ -640,59 +620,97 @@ button,
     z-index: 1;
 }
 
-.section-features::before,
-.section-cta::before {
+.section-features::before {
     top: 0;
 }
 
-.section-features::after,
-.section-cta::after {
+.section-features::after {
     bottom: 0;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
     margin-top: 4rem;
 }
 
 .feature-card {
-    background: var(--card);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(10, 34, 53, 0.4);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 2.5rem 2rem;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
-    border-color: rgba(56, 189, 248, 0.4);
-    transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.08);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
-.feature-icon {
-    width: 56px;
-    height: 56px;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
+.feature-icon-wrap {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* Left aligned icon */
 }
 
-.feature-icon svg {
-    width: 100%;
-    height: 100%;
+.big-icon {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    /* Blue tint effect from reference */
+    filter: drop-shadow(100px 0 0 var(--accent));
+    transform: translateX(-100px);
+    clip-path: inset(0 -100px 0 100px);
 }
 
 .feature-title {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
     color: #fff;
+    margin-bottom: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .feature-desc {
-    font-size: 0.88rem;
+    font-size: 1.05rem;
     color: var(--muted);
-    line-height: 1.75;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .feature-card {
+        padding: 1.5rem;
+        gap: 1.2rem;
+        text-align: center;
+    }
+
+    .feature-header {
+        flex-direction: column;
+        /* Icon above title on small mobile */
+        justify-content: center;
+    }
+
+    .big-icon {
+        width: 56px;
+        height: 56px;
+    }
 }
 
 /* ============================
@@ -952,6 +970,26 @@ button,
     overflow: hidden;
 }
 
+.section-cta::before,
+.section-cta::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    box-shadow: 0 0 15px var(--accent);
+    z-index: 1;
+}
+
+.section-cta::before {
+    top: 0;
+}
+
+.section-cta::after {
+    bottom: 0;
+}
+
 .cta-inner {
     text-align: center;
     position: relative;
@@ -1179,6 +1217,8 @@ button,
     cursor: url('../src/cursor/cursor_hover.cur'), pointer;
     text-decoration: none;
     transition: all 0.4s ease;
+}
+
 }
 
 .tool-icon {
@@ -1589,4 +1629,415 @@ footer {
         white-space: nowrap;
         font-size: 0.65rem;
     }
+}
+
+/* ============================
+   HERO ACTIONS & TRAILER BUTTON
+============================= */
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 15;
+}
+
+/* ==============================
+   NEON BORDER BUTTON SYSTEM
+============================== */
+
+/* Outer glow halo — always on, intensifies on hover */
+.hero-btn-play-wrap {
+    position: relative;
+    display: inline-block;
+    border-radius: 60px;
+    /* Reduced ambient halo */
+    filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.25));
+    transition: filter 0.4s ease;
+}
+
+.hero-btn-play-wrap:hover {
+    filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
+}
+
+/* ---- The actual button ---- */
+.hero-btn-play {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.6rem 2.8rem 0.6rem 0.6rem;
+    /* Dark glass interior */
+    background: rgba(2, 9, 18, 0.78);
+    /* Neon stroke — the hero of the design */
+    border: 1.5px solid rgba(56, 189, 248, 0.85);
+    border-radius: 58px;
+    color: #fff;
+    font-family: 'Glech', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition:
+        background 0.4s ease,
+        border-color 0.4s ease,
+        transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.4s ease;
+    /* Inner neon glow + subtle depth shadow */
+    box-shadow:
+        inset 0 0 18px rgba(56, 189, 248, 0.08),
+        0 6px 28px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    white-space: nowrap;
+    /* Firefly canvas sits inside, so we need z stacking */
+    isolation: isolate;
+}
+
+/* Neon sweep shimmer — diagonal light stroke */
+.hero-btn-play::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -130%;
+    width: 70%;
+    height: calc(100% + 4px);
+    background: linear-gradient(105deg,
+            transparent 0%,
+            rgba(56, 189, 248, 0.22) 45%,
+            rgba(180, 240, 255, 0.14) 55%,
+            transparent 100%);
+    transform: skewX(-18deg);
+    transition: left 0.75s cubic-bezier(0.4, 0, 0.15, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Bottom neon inner reflection */
+.hero-btn-play::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(56, 189, 248, 0.6) 30%,
+            rgba(45, 212, 191, 0.6) 70%,
+            transparent);
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-btn-play:hover {
+    background: rgba(3, 16, 32, 0.85);
+    border-color: rgba(100, 220, 255, 1);
+    transform: translateY(-2px);
+    box-shadow:
+        inset 0 0 18px rgba(56, 189, 248, 0.12),
+        0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.hero-btn-play:hover::before {
+    left: 160%;
+}
+
+.hero-btn-play:hover::after {
+    opacity: 1;
+}
+
+.hero-btn-play:active {
+    transform: translateY(-1px) scale(1.01);
+    border-color: rgba(56, 189, 248, 0.7);
+}
+
+/* ---- Play icon circle ---- */
+@keyframes pulse-play {
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(56, 189, 248, 0.7),
+            0 0 12px rgba(56, 189, 248, 0.5),
+            inset 0 0 8px rgba(255, 255, 255, 0.15);
+    }
+
+    65% {
+        box-shadow:
+            0 0 0 14px rgba(56, 189, 248, 0),
+            0 0 12px rgba(56, 189, 248, 0.5),
+            inset 0 0 8px rgba(255, 255, 255, 0.15);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(56, 189, 248, 0),
+            0 0 12px rgba(56, 189, 248, 0.5),
+            inset 0 0 8px rgba(255, 255, 255, 0.15);
+    }
+}
+
+.play-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    /* Solid neon circle — bold and readable */
+    background: #38bdf8;
+    color: #020b14;
+    border-radius: 50%;
+    border: 1px solid rgba(180, 240, 255, 0.6);
+    box-shadow:
+        0 0 14px rgba(56, 189, 248, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition:
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+    animation: pulse-play 2.4s ease-out infinite;
+    z-index: 2;
+}
+
+.hero-btn-play:hover .play-icon-wrap {
+    transform: scale(1.07);
+    /* Stay cyan — don't blow out to white */
+    background: #5ecfef;
+    box-shadow:
+        0 0 14px rgba(56, 189, 248, 0.6),
+        0 0 28px rgba(56, 189, 248, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: none;
+}
+
+/* Pulsating Halo Rings (Emerged from Icon Border) */
+.hero-btn-play-wrap::before,
+.hero-btn-play-wrap::after {
+    content: "";
+    position: absolute;
+    /* Center it over the play icon circle edge: border (1.5) + padding (0.6rem) + radius (25) */
+    top: 50%;
+    left: 36px;
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+    border-radius: 50%;
+    /* Matching the icon border thickness */
+    border: 2px solid #38bdf8;
+    /* Balanced neon glow (middle ground) */
+    box-shadow:
+        0 0 15px rgba(56, 189, 248, 0.8),
+        inset 0 0 8px rgba(56, 189, 248, 0.4);
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes halo-pulse {
+    0% {
+        transform: scale(1);
+        /* Starts exactly at icon edge */
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(2.0);
+        opacity: 0;
+    }
+}
+
+.hero-btn-play-wrap:hover::before {
+    animation: halo-pulse 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.hero-btn-play-wrap:hover::after {
+    animation: halo-pulse 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    animation-delay: 0.6s;
+}
+
+/* Post-video development image state in Modal */
+.trailer-content.video-ended {
+    background-image: url('../src/img/development.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.trailer-content.video-ended video {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.trailer-content video {
+    transition: opacity 0.8s ease;
+}
+
+/* ---- Button label ---- */
+.hero-btn-play .btn-label {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    line-height: 1;
+    z-index: 2;
+}
+
+.hero-btn-play .btn-label .btn-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(56, 189, 248, 0.75);
+    transition: color 0.35s ease, opacity 0.35s ease;
+}
+
+.hero-btn-play .btn-label .btn-main-text {
+    font-family: 'Glech', serif;
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    color: #dff6ff;
+    /* Subtle neon text glow at rest */
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+    transition: color 0.35s ease, text-shadow 0.35s ease;
+}
+
+.hero-btn-play:hover .btn-label .btn-eyebrow {
+    color: #2dd4bf;
+}
+
+.hero-btn-play:hover .btn-label .btn-main-text {
+    color: #ffffff;
+    text-shadow:
+        0 0 14px rgba(56, 189, 248, 0.85),
+        0 0 35px rgba(56, 189, 248, 0.4);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 650px) {
+    .hero-btn-play-wrap {
+        border-radius: 50px;
+    }
+
+    .hero-btn-play {
+        padding: 0.5rem 2rem 0.5rem 0.5rem;
+        border-radius: 48px;
+        gap: 1rem;
+    }
+
+    .play-icon-wrap {
+        width: 44px;
+        height: 44px;
+    }
+
+    .hero-btn-play .btn-label .btn-main-text {
+        font-size: 0.82rem;
+        letter-spacing: 0.15em;
+    }
+
+    .hero-btn-play .btn-label .btn-eyebrow {
+        font-size: 0.5rem;
+    }
+}
+
+/* ============================
+   TRAILER MODAL
+============================= */
+.trailer-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.trailer-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.trailer-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 11, 20, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.trailer-close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    z-index: 10;
+    background: rgba(6, 24, 41, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: url('../src/cursor/cursor_hover.cur'), pointer;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.trailer-close-btn:hover {
+    background: var(--accent);
+    color: var(--deep);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 20px var(--glow);
+}
+
+.trailer-close-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.trailer-content {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    aspect-ratio: 16/9;
+    border: 2px solid rgba(56, 189, 248, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 50px rgba(56, 189, 248, 0.3);
+    transform: scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.trailer-content::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.trailer-modal.open .trailer-content {
+    transform: scale(1);
+}
+
+.trailer-content video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #000;
 }

@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.innerHTML = texts[key];
             }
         });
-        
+
         // ES: Procesar iconos de Lucide / EN: Process Lucide icons
         if (typeof lucide !== 'undefined') lucide.createIcons();
 
@@ -539,4 +539,59 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
     });
+
+    /* =========================================================================
+       9. TRAILER MODAL
+       ========================================================================= */
+    const btnPlayTrailer = document.getElementById('btn-play-trailer');
+    const trailerModal = document.getElementById('trailer-modal');
+    const trailerBg = document.getElementById('trailer-bg');
+    const trailerClose = document.getElementById('trailer-close');
+    const trailerVideo = document.getElementById('trailer-video');
+    let trailerTimeout;
+
+    function openTrailer() {
+        if (!trailerModal) return;
+        trailerModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        if (trailerVideo) {
+            trailerVideo.currentTime = 0;
+            // 3-second delay before playing
+            trailerTimeout = setTimeout(() => {
+                trailerVideo.play().catch(e => console.log('Auto-play blocked:', e));
+            }, 500);
+        }
+    }
+
+    function closeTrailer() {
+        if (!trailerModal) return;
+        trailerModal.classList.remove('open');
+        document.body.style.overflow = '';
+        if (trailerTimeout) clearTimeout(trailerTimeout);
+        if (trailerVideo) {
+            trailerVideo.pause();
+        }
+    }
+
+    if (btnPlayTrailer) btnPlayTrailer.addEventListener('click', openTrailer);
+    if (trailerClose) trailerClose.addEventListener('click', closeTrailer);
+    if (trailerBg) trailerBg.addEventListener('click', closeTrailer);
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && trailerModal && trailerModal.classList.contains('open')) {
+            closeTrailer();
+        }
+    });
+
+    // Handle video end to show poster
+    if (trailerVideo && trailerModal) {
+        const content = trailerVideo.closest('.trailer-content');
+        trailerVideo.addEventListener('ended', () => {
+            if (content) content.classList.add('video-ended');
+        });
+        trailerVideo.addEventListener('play', () => {
+            if (content) content.classList.remove('video-ended');
+        });
+    }
+
 });
