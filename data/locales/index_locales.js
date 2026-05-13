@@ -2,10 +2,7 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
     // Hero & Tagline
     tagline_sub: "— EL ABISMO TE LLAMA —",
     tagline_desc: "Sumérgete en las fosas más profundas del océano. Explora ecosistemas nunca vistos, analiza especies desconocidas y sobrevive donde la luz no llega.",
-    badge_platforms: "<i data-lucide=\"monitor\" style=\"width: 18px; height: 18px; vertical-align: -3px; margin-right: 4px;\"></i> PC / Mac",
-    badge_genre: "<i data-lucide=\"earth\" style=\"width: 18px; height: 18px; vertical-align: -3px; margin-right: 4px;\"></i> Mundo Abierto",
-    badge_fauna: "<i data-lucide=\"fish\" style=\"width: 18px; height: 18px; vertical-align: -3px; margin-right: 4px;\"></i> Especies Abisales",
-    badge_simulator: "<svg width=\"26\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"vertical-align: -4px; margin-right: 6px;\"><path d=\"M3 11v6h2l1 -1.5l3 1.5h10a3 3 0 0 0 0 -6h-10l-3 1.5l-1 -1.5h-2z\" /><path d=\"M17 11l-1 -3h-5l-1 3\" /><path d=\"M13 8v-2a1 1 0 0 1 1 -1h1\" /></svg> Simulador de Batiscafo",
+    hero_trailer: "VER TRÁILER DE GAMEPLAY",
     quote_1: "\"El mar no revela sus secretos a los impacientes\"",
 
     // Historia
@@ -53,9 +50,7 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
     // Descargas
     dl_title: "¿Preparado para<br><span class=\"accent\">el Descenso?</span>",
     dl_desc: "ABYSSEA está en desarrollo activo. Añádelo a tu lista de deseos y sé el primero en explorar las profundidades cuando llegue el momento.",
-    dl_title_win: "WINDOWS",
-    dl_title_mac: "MACOS",
-    dl_v_history: "VER HISTORIAL COMPLETO",
+
 
     // Tools
     tools_title: "HERRAMIENTAS"
@@ -65,10 +60,7 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
     // Hero & Tagline
     tagline_sub: "— THE ABYSS CALLS YOU —",
     tagline_desc: "Dive into the deepest trenches of the ocean. Explore unseen ecosystems, analyze unknown species, and survive where light doesn't reach.",
-    badge_platforms: "<i data-lucide=\"monitor\" style=\"width: 18px; height: 18px; vertical-align: -3px; margin-right: 4px;\"></i> PC / Mac",
-    badge_genre: "<i data-lucide=\"earth\" style=\"width: 18px; height: 18px; vertical-align: -3px; margin-right: 4px;\"></i> Open World",
-    badge_fauna: "<i data-lucide=\"fish\" style=\"width: 18px; height: 18px; vertical-align: -3px; margin-right: 4px;\"></i> Abyssal Species",
-    badge_simulator: "<svg width=\"26\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"vertical-align: -4px; margin-right: 6px;\"><path d=\"M3 11v6h2l1 -1.5l3 1.5h10a3 3 0 0 0 0 -6h-10l-3 1.5l-1 -1.5h-2z\" /><path d=\"M17 11l-1 -3h-5l-1 3\" /><path d=\"M13 8v-2a1 1 0 0 1 1 -1h1\" /></svg> Bathyscaphe Simulator",
+    hero_trailer: "WATCH GAMEPLAY TRAILER",
     quote_1: "\"The sea does not reveal its secrets to the impatient\"",
 
     // Story
@@ -116,9 +108,7 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
     // CTA
     dl_title: "Ready for<br><span class=\"accent\">the Descent?</span>",
     dl_desc: "ABYSSEA is in active development. Add it to your wishlist and be the first to explore the depths when the time comes.",
-    dl_title_win: "WINDOWS",
-    dl_title_mac: "MACOS",
-    dl_v_history: "VIEW FULL HISTORY",
+
 
     // Tools
     tools_title: "TOOLS"
