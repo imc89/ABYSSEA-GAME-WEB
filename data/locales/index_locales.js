@@ -2,7 +2,7 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
     // Hero & Tagline
     tagline_sub: "— EL ABISMO TE LLAMA —",
     tagline_desc: "Sumérgete en las fosas más profundas del océano. Explora ecosistemas nunca vistos, analiza especies desconocidas y sobrevive donde la luz no llega.",
-    hero_trailer: "VER TRÁILER DE GAMEPLAY",
+    hero_trailer: "VER TRÁILER",
     quote_1: "\"El mar no revela sus secretos a los impacientes\"",
 
     // Historia
@@ -60,7 +60,7 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
     // Hero & Tagline
     tagline_sub: "— THE ABYSS CALLS YOU —",
     tagline_desc: "Dive into the deepest trenches of the ocean. Explore unseen ecosystems, analyze unknown species, and survive where light doesn't reach.",
-    hero_trailer: "WATCH GAMEPLAY TRAILER",
+    hero_trailer: "WATCH TRAILER",
     quote_1: "\"The sea does not reveal its secrets to the impatient\"",
 
     // Story
