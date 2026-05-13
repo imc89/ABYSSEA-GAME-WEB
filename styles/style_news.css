@@ -238,17 +238,21 @@
     .news-summary {
         grid-template-columns: 1fr;
     }
+
     .news-thumb-wrapper {
         height: 200px;
         border-right: none;
         border-bottom: 1px solid var(--border);
     }
+
     .news-modal-body {
         padding: 1.5rem;
     }
+
     .news-modal-title {
         font-size: 1.8rem;
     }
+
     .news-modal-overlay {
         padding: 1rem;
     }

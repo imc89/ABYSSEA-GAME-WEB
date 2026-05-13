@@ -1219,8 +1219,6 @@ button,
     transition: all 0.4s ease;
 }
 
-}
-
 .tool-icon {
     height: 70px;
     width: auto;
@@ -1245,7 +1243,6 @@ button,
 
 .tool-icon[alt="NPM"] {
     height: 40px;
-    /* Usually wider */
     margin-top: 20px;
 }
 
