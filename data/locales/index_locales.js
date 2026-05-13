@@ -41,11 +41,11 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
     // Galería
     gallery_title: "CAPTURAS DEL <span class=\"accent\">ABISMO</span>",
     gallery_sub: "Vistas del mundo submarino que te espera",
-    gallery_cap_1: "El Logo del Abismo",
-    gallery_cap_2: "CRIATURA ABISAL",
-    gallery_cap_3: "EXPLORACIÓN INMERSIVA",
-    gallery_cap_4: "GESTIÓN DE SUMERGIBLE",
-    gallery_cap_placeholder: "Vista Submarina",
+    gallery_cap_1: "LOGO ABYSSEA",
+    gallery_cap_2: "VISTA CERCANA",
+    gallery_cap_3: "CRIATURA ABISAL",
+    gallery_cap_4: "EXPLORACIÓN INMERSIVA",
+    gallery_cap_5: "GESTIÓN DE SUMERGIBLE",
 
     // Descargas
     dl_title: "¿Preparado para<br><span class=\"accent\">el Descenso?</span>",
@@ -99,11 +99,11 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
     // Gallery
     gallery_title: "ABYSS <span class=\"accent\">CAPTURES</span>",
     gallery_sub: "Views of the underwater world that awaits you",
-    gallery_cap_1: "The Abyss Logo",
-    gallery_cap_2: "ABYSSAL CREATURE",
-    gallery_cap_3: "IMMERSIVE EXPLORATION",
-    gallery_cap_4: "SUBMERSIBLE MANAGEMENT",
-    gallery_cap_placeholder: "Underwater View",
+    gallery_cap_1: "LOGO ABYSSEA",
+    gallery_cap_2: "CLOSE-UP VIEW",
+    gallery_cap_3: "ABYSSAL CREATURE",
+    gallery_cap_4: "IMMERSIVE EXPLORATION",
+    gallery_cap_5: "SUBMERSIBLE MANAGEMENT",
 
     // CTA
     dl_title: "Ready for<br><span class=\"accent\">the Descent?</span>",
