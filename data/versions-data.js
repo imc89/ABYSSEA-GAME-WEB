@@ -7,21 +7,21 @@
 
 const ABYSSEA_VERSIONS = {
     // ES: Versión Beta actual / EN: Current Beta Version
-    beta: {
-        version: "v1.0.0-beta.1",
-        date: "8 de Mayo, 2026",
-        // ES: Cambios en esta versión (separados por guiones)
-        // EN: Changes in this version (separated by dashes)
-        changes: "- Nueva biome: Fumarolas Hidrotermales - Optimización de partículas - Corrección de errores en colisiones",
-        windows: {
-            size: "465 MB",
-            url: "downloads/Abyssea_Setup_Beta.exe"
-        },
-        macos: {
-            size: "435 MB",
-            url: "downloads/Abyssea_macOS_Beta.dmg"
-        }
-    },
+    // beta: {
+    //     version: "v1.0.0-beta.1",
+    //     date: "8 de Mayo, 2026",
+    //     // ES: Cambios en esta versión (separados por guiones)
+    //     // EN: Changes in this version (separated by dashes)
+    //     changes: "- Nueva biome: Fumarolas Hidrotermales - Optimización de partículas - Corrección de errores en colisiones",
+    //     windows: {
+    //         size: "465 MB",
+    //         url: "downloads/Abyssea_Setup_Beta.exe"
+    //     },
+    //     macos: {
+    //         size: "435 MB",
+    //         url: "downloads/Abyssea_macOS_Beta.dmg"
+    //     }
+    // },
 
     // ES: Versión Estable más reciente / EN: Latest Stable Version
     /*

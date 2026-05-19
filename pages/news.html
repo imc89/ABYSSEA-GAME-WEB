@@ -23,8 +23,10 @@
             <a href="../index.html" class="back-link" data-i18n="ver_back_btn">Volver al inicio</a>
 
             <header class="news-header reveal">
-                <h1 class="section-heading font-glech" data-i18n="news_title">TRANSMISIONES DEL <span class="accent">ABISMO</span></h1>
-                <p class="section-sub" data-i18n="news_sub">Últimas actualizaciones, parches y novedades del desarrollo</p>
+                <h1 class="section-heading font-glech" data-i18n="news_title">TRANSMISIONES DEL <span
+                        class="accent">ABISMO</span></h1>
+                <p class="section-sub" data-i18n="news_sub">Últimas actualizaciones, parches y novedades del desarrollo
+                </p>
             </header>
 
             <div class="news-list reveal reveal-delay-1" id="news-list-container">
@@ -50,28 +52,28 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="../data/locales/common_locales.js"></script>
     <script src="../data/locales/news_locales.js"></script>
-    
+
     <!-- =========================================================================
          INSTRUCCIONES PARA AÑADIR NOTICIAS:
          1. Crea un nuevo archivo en pages/news/ (ej: news_10-5-2026.js)
          2. Carga el archivo aquí abajo añadiendo una nueva etiqueta <script>
     ========================================================================= -->
-    <script src="news/news_9-5-2026.js"></script>
+    <script src="news/news_20-5-2026.js"></script>
 
     <script src="../scripts/scripts.js"></script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.getElementById('news-list-container');
             const lang = localStorage.getItem('abyssea_lang') || (navigator.language.startsWith('es') ? 'es' : 'en');
             const locales = window.ABYSSEA_LOCALES[lang];
-            
+
             const btnText = locales.news_read_more || 'LEER MÁS';
             const closeText = locales.news_close || 'CERRAR';
 
             // window.ABYSSEA_NEWS is populated by the loaded scripts
             const newsItems = window.ABYSSEA_NEWS || [];
-            
+
             const newsModal = document.getElementById('news-modal');
             const newsModalClose = document.getElementById('news-modal-close');
             const modalDate = document.getElementById('news-modal-date');
@@ -81,13 +83,18 @@
             // Render from newest to oldest
             newsItems.reverse().forEach(news => {
                 const data = news.locales[lang] || news.locales['en'];
-                
+
+                const isVideo = news.image && (news.image.endsWith('.mp4') || news.image.endsWith('.mov') || news.image.endsWith('.webm'));
+                const mediaTag = isVideo
+                    ? `<video src="${news.image}" class="news-thumb" autoplay loop muted playsinline style="object-fit: cover; width: 100%; height: 100%;"></video>`
+                    : `<img src="${news.image}" alt="News Image" class="news-thumb">`;
+
                 const card = document.createElement('div');
                 card.className = 'news-card';
                 card.innerHTML = `
                     <div class="news-summary">
                         <div class="news-thumb-wrapper">
-                            <img src="${news.image}" alt="News Image" class="news-thumb">
+                            ${mediaTag}
                         </div>
                         <div class="news-excerpt">
                             <span class="news-date">${news.date}</span>
@@ -100,13 +107,13 @@
 
                 const summaryBtn = card.querySelector('.news-summary');
                 const expandBtn = card.querySelector('.news-expand-btn');
-                
+
                 summaryBtn.addEventListener('click', () => {
                     // Populate modal
                     modalDate.textContent = news.date;
                     modalTitle.textContent = data.title;
                     modalContent.innerHTML = data.content;
-                    
+
                     // Open modal
                     newsModal.classList.add('open');
                     document.body.style.overflow = 'hidden'; // Prevent scrolling

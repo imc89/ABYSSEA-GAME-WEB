@@ -18,21 +18,21 @@
             padding-bottom: 80px;
             min-height: 100vh;
         }
-        
+
         .about-me-section {
             margin-top: 8rem;
             padding-top: 6rem;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
         }
-        
+
         .about-me-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
-        
+
         .about-image-wrapper {
             position: relative;
             border-radius: 12px;
@@ -42,16 +42,19 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.1);
             backdrop-filter: blur(10px);
         }
-        
+
         .about-image-wrapper::before {
             content: '';
             position: absolute;
-            top: -5px; right: -5px; bottom: -5px; left: -5px;
+            top: -5px;
+            right: -5px;
+            bottom: -5px;
+            left: -5px;
             border: 1px solid rgba(56, 189, 248, 0.3);
             border-radius: 16px;
             pointer-events: none;
         }
-        
+
         .about-img {
             width: 100%;
             height: auto;
@@ -60,11 +63,11 @@
             filter: grayscale(20%) contrast(1.1);
             transition: filter 0.4s ease;
         }
-        
+
         .about-image-wrapper:hover .about-img {
             filter: grayscale(0%) contrast(1.1);
         }
-        
+
         .about-content h3 {
             font-size: 1.5rem;
             color: var(--accent-color, #38bdf8);
@@ -72,12 +75,13 @@
             letter-spacing: 2px;
             text-transform: uppercase;
         }
-        
+
         @media (max-width: 850px) {
             .about-me-grid {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
+
             .about-image-wrapper {
                 order: -1;
             }
@@ -104,10 +108,18 @@
                     </div>
                     <div class="about-content reveal reveal-delay-1">
                         <h3 class="font-glech" data-i18n="about_me_title">SOBRE MÍ</h3>
-                        <h2 class="section-heading font-glech" data-i18n="about_me_subtitle">EL CREADOR DEL<br><span class="accent">ABISMO</span></h2>
-                        <p class="body-text" data-i18n="about_me_p1">Detrás de la oscuridad y la inmensidad de ABYSSEA se encuentra Iñigo, un desarrollador independiente con una pasión obsesiva por las profundidades inexploradas y la tecnología inmersiva.</p>
-                        <p class="body-text" data-i18n="about_me_p2">Tras años trabajando en la industria, decidí aislarme para crear algo genuino. Un juego que no te lleva de la mano, sino que te arroja al vacío y te obliga a sobrevivir. Mi objetivo es que sientas el mismo respeto y fascinación por el océano que siento yo.</p>
-                        <a href="https://twitter.com/tu_usuario" target="_blank" class="nav-cta-btn" style="margin-top: 1.5rem; display: inline-flex; text-decoration: none;" data-i18n="about_me_btn">SÍGUEME EN REDES</a>
+                        <h2 class="section-heading font-glech" data-i18n="about_me_subtitle">EL CREADOR DEL<br><span
+                                class="accent">ABISMO</span></h2>
+                        <p class="body-text" data-i18n="about_me_p1">Detrás de la oscuridad y la inmensidad de ABYSSEA
+                            se encuentra Iñigo, un desarrollador independiente con una pasión por las profundidades
+                            inexploradas y la tecnología inmersiva.</p>
+                        <p class="body-text" data-i18n="about_me_p2">El proyecto nace con la intención de crear algo
+                            genuino. Un juego que no te lleva de la mano, sino que te arroja al vacío y te obliga a
+                            sobrevivir. El objetivo es hacer sentir la fascinación por las extrañas especies que habitan
+                            el océano y transmitir el respeto por este entorno inexplorado.</p>
+                        <a href="#" target="_blank" class="nav-cta-btn"
+                            style="margin-top: 1.5rem; display: inline-flex; text-decoration: none;"
+                            data-i18n="about_me_btn">SÍGUEME EN REDES</a>
                     </div>
                 </div>
             </section>
@@ -120,11 +132,14 @@
                     <div class="dev-info reveal">
                         <h2 class="section-heading font-glech" data-i18n="dev_title">UNA VISIÓN<br><span
                                 class="accent">INDEPENDIENTE</span></h2>
-                        <p class="body-text" data-i18n="dev_p1">ABYSSEA no es el producto de un gran estudio corporativo,
+                        <p class="body-text" data-i18n="dev_p1">ABYSSEA no es el producto de un gran estudio
+                            corporativo,
                             sino la visión inquebrantable de un único desarrollador. Diseñado, programado y esculpido en
                             solitario para ofrecer una experiencia inmersiva sin compromisos ni presiones externas.</p>
-                        <p class="body-text" data-i18n="dev_p2">Cada criatura, cada línea de código y cada sonido del abismo
-                            ha sido meticulosamente creado con la pasión de demostrar que los mundos más inabarcables pueden
+                        <p class="body-text" data-i18n="dev_p2">Cada criatura, cada línea de código y cada sonido del
+                            abismo
+                            ha sido meticulosamente creado con la pasión de demostrar que los mundos más inabarcables
+                            pueden
                             nacer de la dedicación absoluta de una sola mente.</p>
                     </div>
                     <div class="dev-visual reveal reveal-delay-1">

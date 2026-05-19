@@ -9,8 +9,8 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
     // About Me Section
     about_me_title: "SOBRE MÍ",
     about_me_subtitle: "EL CREADOR DEL<br><span class=\"accent\">ABISMO</span>",
-    about_me_p1: "Detrás de la oscuridad y la inmensidad de ABYSSEA se encuentra Iñigo, un desarrollador independiente con una pasión obsesiva por las profundidades inexploradas y la tecnología inmersiva.",
-    about_me_p2: "Tras años trabajando en la industria, decidí aislarme para crear algo genuino. Un juego que no te lleva de la mano, sino que te arroja al vacío y te obliga a sobrevivir. Mi objetivo es que sientas el mismo respeto y fascinación por el océano que siento yo.",
+    about_me_p1: "Detrás de la oscuridad y la inmensidad de ABYSSEA se encuentra Iñigo, un desarrollador independiente con una pasión por las profundidades inexploradas y la tecnología inmersiva.",
+    about_me_p2: "El proyecto nace con la intención de crear algo genuino. Un juego que no te lleva de la mano, sino que te arroja al vacío y te obliga a sobrevivir. El objetivo es hacer sentir la fascinación por las extrañas especies que habitan el océano y transmitir el respeto por este entorno inexplorado.",
     about_me_btn: "SÍGUEME EN REDES"
 });
 
@@ -25,7 +25,7 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
     // About Me Section
     about_me_title: "ABOUT ME",
     about_me_subtitle: "THE CREATOR OF THE<br><span class=\"accent\">ABYSS</span>",
-    about_me_p1: "Behind the darkness and immensity of ABYSSEA is Iñigo, an independent developer with an obsessive passion for unexplored depths and immersive technology.",
-    about_me_p2: "After years of working in the industry, I decided to isolate myself to create something genuine. A game that doesn't hold your hand, but throws you into the void and forces you to survive. My goal is for you to feel the same respect and fascination for the ocean that I do.",
+    about_me_p1: "Behind the darkness and immensity of ABYSSEA is Iñigo, an independent developer with a passion for unexplored depths and immersive technology.",
+    about_me_p2: "The project was born with the intention of creating something genuine. A game that doesn't hold your hand, but throws you into the void and forces you to survive. The goal is to convey fascination for the strange species that inhabit the ocean and inspire respect for this unexplored environment.",
     about_me_btn: "FOLLOW ME ON SOCIALS"
 });
