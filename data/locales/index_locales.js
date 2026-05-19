@@ -7,8 +7,8 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
 
     // Historia
     story_title: "La Oscuridad<br><span class=\"accent\">Tiene Memoria</span>",
-    story_p1: "A 11.000 metros de profundidad, más allá de donde cualquier expedición humana ha llegado, yace algo que no debería existir. Estructuras que desafían la geología, señales que laten como un corazón biológico.",
-    story_p2: "Tomas el control del A.S.S. (Abyssal Survival Submarine), un prototipo de exploración diseñado para soportar presiones extremas y descubrir qué hay más allá del horizonte biológico.",
+    story_p1: "A 11.000 metros de profundidad, la biología se transforma y las leyes conocidas se disipan. Es el límite donde la presión extrema desafía a cualquier estructura, convirtiendo este vacío en el entorno más hostil y fascinante del planeta para la investigación científica.",
+    story_p2: "Toma el control de tu propio sumergible, un batiscafo de alta precisión diseñado para navegar la oscuridad total. Tu misión es dominar los sistemas de inmersión, gestionar la telemetría y catalogar a los especímenes únicos que habitan este ecosistema inexplorado.",
     story_btn: "DESCUBRIR MÁS",
 
     // Profundidades
@@ -26,16 +26,16 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
     feat_3_title: "EXPLORACIÓN INMERSIVA",
     feat_3_desc: "Un viaje sensorial diseñado para transmitir la inmensidad y el aislamiento del océano profundo. Siente la presión y el silencio.",
     feat_4_title: "GESTIÓN DE RECURSOS",
-    feat_4_desc: "El oxígeno, la energía y la presión del casco son tus limitaciones reales. Calcula antes de descender más.",
+    feat_4_desc: "El oxígeno, la temperatura y la energía son tus limitaciones reales. Calcula antes de descender más.",
     feat_5_title: "SIMULACIÓN REALISTA",
-    feat_5_desc: "Basado en datos oceanográficos reales, experimenta la física de las profundidades, desde la luz hasta la presión hidrostática.",
+    feat_5_desc: "Basado en datos oceanográficos reales, experimenta la física de las profundidades, desde la luz hasta la disminución drástica de las temperaturas.",
     feat_6_title: "CATÁLOGO DE ESPECIES",
-    feat_6_desc: "Tu principal objetivo: documentar la biodiversidad del abismo. Fotografía y cataloga nuevas formas de vida.",
+    feat_6_desc: "Tu principal objetivo: documentar la biodiversidad del abismo. Cataloga nuevas formas de vida.",
 
     // Estadísticas
     stat_depth: "Profundidad máxima",
     stat_species: "Especies descubribles",
-    stat_worlds: "Mundos generados",
+    stat_pressure: "Presión hidrostática",
     stat_explored: "Del océano explorado",
 
     // Galería
@@ -49,7 +49,7 @@ Object.assign(window.ABYSSEA_LOCALES.es, {
 
     // Descargas
     dl_title: "¿Preparado para<br><span class=\"accent\">el Descenso?</span>",
-    dl_desc: "ABYSSEA está en desarrollo activo. Añádelo a tu lista de deseos y sé el primero en explorar las profundidades cuando llegue el momento.",
+    dl_desc: "ABYSSEA está en desarrollo activo. Consulta el estado del proyecto y las últimas actualizaciones en nuestra sección de noticias y sé el primero en explorar las profundidades el día del estreno .",
 
 
     // Tools
@@ -65,8 +65,8 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
 
     // Story
     story_title: "The Darkness<br><span class=\"accent\">Has Memory</span>",
-    story_p1: "At 11,000 meters deep, beyond where any human expedition has reached, lies something that shouldn't exist. Structures that defy geology, signals that pulse like a biological heart.",
-    story_p2: "You take control of the A.S.S. (Abyssal Survival Submarine), an exploration prototype designed to withstand extreme pressures and discover what lies beyond the biological horizon.",
+    story_p1: "At 11,000 meters deep, biology transforms and known laws dissipate. It is the boundary where extreme pressure challenges any structure, turning this void into the most hostile and fascinating environment on the planet for scientific research.",
+    story_p2: "Take control of your own submersible, a high-precision bathyscaphe designed to navigate complete darkness. Your mission is to master the immersion systems, manage telemetry, and catalog the unique specimens that inhabit this unexplored ecosystem.",
     story_btn: "DISCOVER MORE",
 
     // Depths
@@ -84,22 +84,22 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
     feat_3_title: "IMMERSIVE EXPLORATION",
     feat_3_desc: "A sensory journey designed to convey the vastness and isolation of the deep ocean. Feel the pressure and silence.",
     feat_4_title: "RESOURCE MANAGEMENT",
-    feat_4_desc: "Oxygen, power, and hull pressure are your real limitations. Every exploration decision has a cost. Calculate before descending further.",
+    feat_4_desc: "Oxygen, temperature, and power are your real limitations. Every exploration decision has a cost. Calculate before descending further.",
     feat_5_title: "REALISTIC SIMULATION",
-    feat_5_desc: "Based on real oceanographic data, experience the physics of the deep, from light propagation to hydrostatic pressure.",
+    feat_5_desc: "Based on real oceanographic data, experience the physics of the deep, from light propagation to the drastic drop in temperatures.",
     feat_6_title: "SPECIES CATALOG",
-    feat_6_desc: "Your main goal: document the abyss's biodiversity. Photograph and catalog new life forms to expand human knowledge.",
+    feat_6_desc: "Your main goal: document the abyss's biodiversity. Catalog new life forms.",
 
     // Stats
     stat_depth: "Max Depth",
     stat_species: "Discoverable Species",
-    stat_worlds: "Generated Worlds",
+    stat_pressure: "Hydrostatic pressure",
     stat_explored: "Ocean Explored",
 
     // Gallery
     gallery_title: "ABYSS <span class=\"accent\">CAPTURES</span>",
     gallery_sub: "Views of the underwater world that awaits you",
-    gallery_cap_1: "LOGO ABYSSEA",
+    gallery_cap_1: "ABYSSEA LOGO",
     gallery_cap_2: "CLOSE-UP VIEW",
     gallery_cap_3: "ABYSSAL CREATURE",
     gallery_cap_4: "IMMERSIVE EXPLORATION",
@@ -107,7 +107,7 @@ Object.assign(window.ABYSSEA_LOCALES.en, {
 
     // CTA
     dl_title: "Ready for<br><span class=\"accent\">the Descent?</span>",
-    dl_desc: "ABYSSEA is in active development. Add it to your wishlist and be the first to explore the depths when the time comes.",
+    dl_desc: "ABYSSEA is in active development. Check the project status and the latest updates in our news section and be the first to explore the depths on release day .",
 
 
     // Tools
